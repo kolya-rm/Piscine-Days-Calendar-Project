@@ -5,14 +5,10 @@
 
 import { getGreeting } from "./common.mjs";
 import daysData from "./days.json" with { type: "json" };
-import { Day} from "./calendar.mjs";
+import { Day, CalendarPage } from "./calendar.mjs";
 
 function onLoadWindow() {
-  const today = new Date();
-  const day = new Day(today.getFullYear(), today.getMonth(), today.getDate());
-
-  console.log(today.getFullYear(), today.getMonth(), today.getDate(), today.getDay());
-  console.log(day.getDateString());
+  
 }
 
 window.onload = onLoadWindow();
