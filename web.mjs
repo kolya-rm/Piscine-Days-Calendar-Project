@@ -5,7 +5,14 @@
 
 import { getGreeting } from "./common.mjs";
 import daysData from "./days.json" with { type: "json" };
+import { Day} from "./calendar.mjs";
 
-// window.onload = function() {
-//     document.querySelector("body").innerText = `${getGreeting()} - there are ${daysData.length} known days`;
-// }
+function onLoadWindow() {
+  const today = new Date();
+  const day = new Day(today.getFullYear(), today.getMonth(), today.getDate());
+
+  console.log(today.getFullYear(), today.getMonth(), today.getDate(), today.getDay());
+  console.log(day.getDateString());
+}
+
+window.onload = onLoadWindow();
