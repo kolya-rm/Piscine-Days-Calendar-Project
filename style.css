@@ -1,7 +1,10 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 #calendar {
   width: 90%;
   margin: auto;
-  background-color: aquamarine;
 }
 
 #week-days {
@@ -12,11 +15,44 @@
 #month-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+#month-days .day {
+  border: 1px solid;
+  
 }
 
 .day {
-  border: 1px solid;
-  aspect-ratio: 1 / 1;
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  aspect-ratio:
+   1 / 1;
   padding: 10px;
+  background-color: azure;
+}
+
+.day-non-current-month {
+  opacity: 0.2;
+}
+
+.day-number p {
+  text-align: right;
+  font-size: 3vw;
+  margin: 0px;
+}
+
+.day-description {
+  align-items: center;
+  align-content: center;
+}
+
+.day-description p {
+  font-size: 1vw;
+  text-align: center;
+}
+
+.day-sunday .day-number {
+  color: red;
 }
 
