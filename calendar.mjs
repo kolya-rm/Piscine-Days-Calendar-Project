@@ -41,26 +41,14 @@ export class CalendarPage {
   static YEAR_MAX = 3000;
   static MONTH_MIN = 0;
   static MONTH_MAX = 11;
-  static MONTH_STRING = {
-    0: "January",
-    1: "February",
-    2: "March",
-    3: "April",
-    4: "May",
-    5: "Jun",
-    6: "July",
-    7: "August",
-    8: "September",
-    9: "October",
-    10: "November",
-    11: "December",
-  };
+  static MONTH_STRINGS = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",];
 
   timestamp = 0;
   days = [];
 
   static getMonthString(month) {
-    return this.MONTH_STRING[month];
+    return this.MONTH_STRINGS[month];
   }
 
   static getDayCount(year, month) {
