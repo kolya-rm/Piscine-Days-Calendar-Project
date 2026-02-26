@@ -18,7 +18,7 @@ body {
   gap: var(--grid-gap);
 }
 
-#calendar-header div {
+.week-day {
   font-size: 1.5vw;
   text-align: right;
   padding: var(--text-padding);
@@ -65,7 +65,7 @@ body {
   text-align: center;
 }
 
-.day-sunday .day-number {
+.day-sunday {
   color: red;
 }
 

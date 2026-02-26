@@ -44,7 +44,7 @@ function renderDay(calendarPage, day) {
   
   dayElement.querySelector(".day-number p").innerText = day.getDay();
   if (day.isSunday()) {
-    dayElement.querySelector(".day").classList.add("day-sunday");
+    dayElement.querySelector(".day .day-number").classList.add("day-sunday");
   }
   if (!calendarPage.isCurrentMonthDay(day)) {
     dayElement.querySelector(".day").classList.add("day-non-current-month");
