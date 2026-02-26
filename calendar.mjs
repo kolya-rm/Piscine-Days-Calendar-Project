@@ -37,6 +37,8 @@ export class Day {
 }
 
 export class CalendarPage {
+  static MONTH_MIN = 0;
+  static MONTH_MAX = 11;
   static MONTH_STRING = {
     0: "January",
     1: "February",
@@ -115,6 +117,10 @@ export class CalendarPage {
 
   getMonth() {
     return this.timestamp.getMonth();
+  }
+
+  getMonthString() {
+    return CalendarPage.getMonthString(this.getMonth());
   }
 
   getDays() {

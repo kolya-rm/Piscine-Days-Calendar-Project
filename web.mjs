@@ -23,7 +23,7 @@ function setupBackwardButton() {
 }
 
 function setupForwardButton() {
-  document.getElementById("month-backward-button").addEventListener("click", onClickForwardButton);
+  document.getElementById("month-forward-button").addEventListener("click", onClickForwardButton);
 }
 //endregion
 
@@ -78,11 +78,13 @@ function onLoadWindow() {
 }
 
 function onClickBackwardButton() {
-
+  changeMonth(-1);
+  render();
 }
 
 function onClickForwardButton() {
-  
+  changeMonth(1);
+  render()
 }
 //endregion
 
@@ -94,6 +96,18 @@ function getCalendarDaysContainer() {
 
 function clearCalendarDaysContainer() {
   getCalendarDaysContainer().innerHTML = "";
+}
+
+function changeMonth(delta) {
+  chosenMonth += delta;
+  if (chosenMonth < CalendarPage.MONTH_MIN) {
+    chosenMonth = CalendarPage.MONTH_MAX;
+    chosenYear--;
+  }
+  if (chosenMonth > CalendarPage.MONTH_MAX) {
+    chosenMonth = CalendarPage.MONTH_MIN;
+    chosenYear++;
+  }
 }
 //endregion
 
