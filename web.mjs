@@ -19,35 +19,39 @@ function setupChosenDate() {
 }
 
 function setupYearInput() {
-  const yearInput = document.getElementById("year-input");
-
-  yearInput.value = chosenYear;
-  yearInput.addEventListener("change", onChangeYearInput);
+  getYearInput().addEventListener("change", onChangeYearInput);
 }
 
 function setupMonthSelect() {
-  const monthSelect = document.getElementById("month-select");
-
   for (let month = CalendarPage.MONTH_MIN; month <= CalendarPage.MONTH_MAX; month++) {
-    monthSelect.add(new Option(CalendarPage.getMonthString(month), month));
+    getMonthSelect().add(new Option(CalendarPage.getMonthString(month), month));
   }
-  monthSelect.value = chosenMonth;
 }
 
 function setupBackwardButton() {
-  document.getElementById("month-backward-button").addEventListener("click", onClickBackwardButton);
+  getBackwardButton().addEventListener("click", onClickBackwardButton);
 }
 
 function setupForwardButton() {
-  document.getElementById("month-forward-button").addEventListener("click", onClickForwardButton);
+  getForwardButton().addEventListener("click", onClickForwardButton);
 }
 //endregion
 
 
 //region render
 function render() {
+  renderYearInput();
+  renderMonthSelect();
   renderMonthText();
   renderCalendarPage();
+}
+
+function renderYearInput() {
+  getYearInput().value = chosenYear;
+}
+
+function renderMonthSelect() {
+  getMonthSelect().value = chosenMonth;
 }
 
 function renderMonthText() {
@@ -114,6 +118,22 @@ function onClickForwardButton() {
 
 
 //region utilities
+function getYearInput() {
+  return document.getElementById("year-input");
+}
+
+function getMonthSelect() {
+  return document.getElementById("month-select");
+}
+
+function getBackwardButton() {
+  return document.getElementById("month-backward-button");
+}
+
+function getForwardButton() {
+  return document.getElementById("month-forward-button");
+}
+
 function getCalendarDaysContainer() {
   return document.getElementById("calendar-body");
 }
@@ -144,11 +164,12 @@ function verifyChosenYear() {
     chosenYear = CalendarPage.YEAR_MIN;
     chosenMonth = CalendarPage.MONTH_MIN;
   }
-  if (chosenYear > CalendarPage.MONTH_MAX) {
+  if (chosenYear > CalendarPage.YEAR_MAX) {
     chosenYear = CalendarPage.YEAR_MAX;
     chosenMonth = CalendarPage.MONTH_MAX;
   }  
 }
 //endregion
+
 
 window.onload = onLoadWindow();
