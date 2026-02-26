@@ -14,6 +14,28 @@ body {
 
 #calendar-header {
   display: grid;
+  grid-template-rows: 3fr 1fr;
+}
+
+#month-header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.5fr 0.5fr 3fr 0.5fr 1.5fr;
+}
+
+#month-backward-button, #month-forward-button {
+  margin: auto;
+}
+
+#month-text {
+  text-align: center;
+  font-size: 3vw;
+  text-transform: uppercase;
+  margin: auto;
+}
+
+#week-header {
+  display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: var(--grid-gap);
   text-transform: capitalize;
