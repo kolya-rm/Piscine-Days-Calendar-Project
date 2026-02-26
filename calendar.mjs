@@ -25,6 +25,10 @@ export class Day {
     return this.timestamp.getDay();
   }
 
+  isSunday() {
+    return this.getWeekDay() === 0;
+  }
+
   getDateString() {
     return `${this.getYear()}-${("" + this.getMonth()).padStart(2, "0")}-${(
       "" + this.getDay()

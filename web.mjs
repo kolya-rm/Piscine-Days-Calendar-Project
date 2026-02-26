@@ -43,6 +43,9 @@ function renderDay(day) {
   const dayElement = document.getElementById("day-template").content.cloneNode(true);
   
   dayElement.querySelector(".day-number p").innerText = day.getDay();
+  if (day.isSunday()) {
+    dayElement.querySelector(".day").classList.add("day-sunday");
+  }
 
   getCalendarDaysContainer().appendChild(dayElement);
 }
@@ -61,6 +64,7 @@ function onLoadWindow() {
 function getCalendarDaysContainer() {
   return document.getElementById("calendar-body");
 }
+
 function clearCalendarDaysContainer() {
   getCalendarDaysContainer().innerHTML = "";
 }
