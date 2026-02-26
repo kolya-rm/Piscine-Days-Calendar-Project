@@ -95,6 +95,10 @@ export class CalendarPage {
     return CalendarPage.getDayCount(this.getYear(), this.getMonth());
   }
 
+  isCurrentMonthDay(day) {
+    return this.getYear() === day.getYear() && this.getMonth() === day.getMonth();
+  }
+
   static getDayCount(year, month) {
     return 33 - new Date(year, month, 33).getDate();
   }

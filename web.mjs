@@ -15,7 +15,7 @@ function setupChosenDate() {
   const now = new Date();
 
   chosenYear = now.getFullYear();
-  chosenMonth = now.getMonth();
+  chosenMonth = now.getMonth() + 3;
 }
 
 function setupCalendarPage() {
@@ -28,23 +28,26 @@ function setupCalendarPage() {
 function renderCalendarPage() {
   const calendarPage = new CalendarPage(chosenYear, chosenMonth);
 
-  renderDays(calendarPage.getDays());
+  renderDays(calendarPage);
 }
 
-function renderDays(dayList) {
+function renderDays(calendarPage) {
   clearCalendarDaysContainer();
 
-  for (const day of dayList) {
-    renderDay(day);
+  for (const day of calendarPage.getDays()) {
+    renderDay(calendarPage, day);
   }
 }
 
-function renderDay(day) {
+function renderDay(calendarPage, day) {
   const dayElement = document.getElementById("day-template").content.cloneNode(true);
   
   dayElement.querySelector(".day-number p").innerText = day.getDay();
   if (day.isSunday()) {
     dayElement.querySelector(".day").classList.add("day-sunday");
+  }
+  if (!calendarPage.isCurrentMonthDay(day)) {
+    dayElement.querySelector(".day").classList.add("day-non-current-month");
   }
 
   getCalendarDaysContainer().appendChild(dayElement);

@@ -1,21 +1,34 @@
+:root {
+  --grid-gap: 10px;
+  --text-padding: 10px;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #calendar {
-  width: 90%;
+  width: 80%;
   margin: auto;
 }
 
 #calendar-header {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  gap: var(--grid-gap);
+}
+
+#calendar-header div {
+  font-size: 1.5vw;
+  text-align: right;
+  padding: var(--text-padding);
+
 }
 
 #calendar-body {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
+  gap: var(--grid-gap);
 }
 
 #calendar-body .day {
@@ -28,7 +41,7 @@ body {
   grid-template-rows: 1fr 2fr;
   aspect-ratio:
    1 / 1;
-  padding: 10px;
+  padding: var(--text-padding);
   background-color: azure;
 }
 
