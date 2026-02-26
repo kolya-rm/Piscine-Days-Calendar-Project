@@ -25,6 +25,10 @@ export class Day {
     return this.timestamp.getDay();
   }
 
+  getWeekDayString() {
+    return this.timestamp.toLocaleString("en-US", {weekday: "long"});
+  }
+
   isSunday() {
     return this.getWeekDay() === 0;
   }
