@@ -7,6 +7,7 @@ import { getGreeting } from "./common.mjs";
 import daysData from "./days.json" with { type: "json" };
 import { Day, CalendarPage } from "./calendar.mjs";
 
+
 let chosenYear;
 let chosenMonth;
 
@@ -84,6 +85,9 @@ function renderDay(calendarPage, day) {
   }
   if (!calendarPage.isCurrentMonthDay(day)) {
     dayElement.querySelector(".day").classList.add("day-non-current-month");
+  }
+  if (day.getDescription()) {
+    dayElement.querySelector(".day-description p").innerText = day.getDescription();
   }
 
   getCalendarDaysContainer().appendChild(dayElement);

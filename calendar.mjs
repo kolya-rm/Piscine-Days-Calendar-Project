@@ -1,10 +1,13 @@
+import commemorativeDays from "./days.json" with { type: "json" };
+
 export class Day {
   timestamp = 0;
   occurrence = "";
+  description = "";
 
   constructor(year, month, day) {
     this.timestamp = new Date();
-    
+
     this.timestamp.setFullYear(year);
     this.timestamp.setMonth(month);
     this.timestamp.setDate(day);
@@ -27,7 +30,15 @@ export class Day {
   }
 
   getWeekDayString() {
-    return this.timestamp.toLocaleString("en-US", {weekday: "long"});
+    return this.timestamp.toLocaleString("en-US", { weekday: "long" });
+  }
+
+  getOccurrence() {
+    return this.occurrence;
+  }
+
+  getDescription() {
+    return this.description;
   }
 
   isSunday() {
@@ -61,7 +72,14 @@ export class CalendarPage {
     "December",
   ];
   static WEEK_DAY_COUNT = 7;
-  static OCCURRENCE_STRINGS = ["first", "second", "third", "fourth", "fifth", "last"];
+  static OCCURRENCE_STRINGS = [
+    "first",
+    "second",
+    "third",
+    "fourth",
+    "fifth",
+    "last",
+  ];
 
   timestamp = 0;
   days = [];
@@ -91,6 +109,7 @@ export class CalendarPage {
     this.createCurrentMonthDays();
     this.createDirectOrderOccurrences();
     this.createReverseOrderOccurrences();
+    this.createCommemorativeDates();
     this.createPreviousMonthDays();
     this.createNextMonthDays();
   }
@@ -113,10 +132,24 @@ export class CalendarPage {
 
   createReverseOrderOccurrences() {
     const days = this.getDays();
-    const occurrenceString = CalendarPage.getOccurrenceString(CalendarPage.OCCURRENCE_STRINGS.length - 1);
+    const occurrenceString = CalendarPage.getOccurrenceString(
+      CalendarPage.OCCURRENCE_STRINGS.length - 1,
+    );
 
     for (let i = 1; i <= CalendarPage.WEEK_DAY_COUNT; i++) {
       days[days.length - i].occurrence = occurrenceString;
+    }
+  }
+
+  createCommemorativeDates() {
+    for (const day of this.getDays()) {
+      for (const commemorativeDay of commemorativeDays) {
+        if (this.getMonthString() === commemorativeDay.monthName &&
+          day.getWeekDayString() === commemorativeDay.dayName &&
+          day.getOccurrence() === commemorativeDay.occurrence) {
+            day.description = commemorativeDay.name;
+          }
+      }
     }
   }
 
