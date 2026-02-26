@@ -19,7 +19,10 @@ function setupChosenDate() {
 }
 
 function setupYearInput() {
-  document.getElementById("year-input").value = chosenYear;
+  const yearInput = document.getElementById("year-input");
+
+  yearInput.value = chosenYear;
+  yearInput.addEventListener("change", onChangeYearInput);
 }
 
 function setupMonthSelect() {
@@ -89,6 +92,11 @@ function onLoadWindow() {
   setupMonthSelect();
   setupBackwardButton();
   setupForwardButton();
+  render();
+}
+
+function onChangeYearInput(event) {
+  chosenYear = event.target.value;
   render();
 }
 
