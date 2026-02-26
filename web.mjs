@@ -26,6 +26,8 @@ function setupMonthSelect() {
   for (let month = CalendarPage.MONTH_MIN; month <= CalendarPage.MONTH_MAX; month++) {
     getMonthSelect().add(new Option(CalendarPage.getMonthString(month), month));
   }
+
+  getMonthSelect().addEventListener("change", onChangeMonthSelect);
 }
 
 function setupBackwardButton() {
@@ -102,6 +104,11 @@ function onLoadWindow() {
 function onChangeYearInput(event) {
   chosenYear = event.target.value;
   verifyChosenYear();
+  render();
+}
+
+function onChangeMonthSelect(event) {
+  chosenMonth = event.target.value;
   render();
 }
 
