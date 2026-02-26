@@ -1,5 +1,6 @@
 export class Day {
   timestamp = 0;
+  occurrence = "";
 
   constructor(year, month, day) {
     this.timestamp = new Date();
@@ -45,8 +46,22 @@ export class CalendarPage {
   static YEAR_MAX = 3000;
   static MONTH_MIN = 0;
   static MONTH_MAX = 11;
-  static MONTH_STRINGS = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December",];
+  static MONTH_STRINGS = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  static WEEK_DAY_COUNT = 7;
+  static OCCURRENCE_STRINGS = ["first", "second", "third", "fourth", "fifth", "last"];
 
   timestamp = 0;
   days = [];
@@ -57,6 +72,10 @@ export class CalendarPage {
 
   static getDayCount(year, month) {
     return 33 - new Date(year, month, 33).getDate();
+  }
+
+  static getOccurrenceString(index) {
+    return this.OCCURRENCE_STRINGS[index];
   }
 
   constructor(year, month) {
@@ -70,6 +89,8 @@ export class CalendarPage {
 
   createDays() {
     this.createCurrentMonthDays();
+    this.createDirectOrderOccurrences();
+    this.createReverseOrderOccurrences();
     this.createPreviousMonthDays();
     this.createNextMonthDays();
   }
@@ -77,6 +98,25 @@ export class CalendarPage {
   createCurrentMonthDays() {
     for (let day = 1; day <= this.getDayCount(); day++) {
       this.days.push(new Day(this.getYear(), this.getMonth(), day));
+    }
+  }
+
+  createDirectOrderOccurrences() {
+    const days = this.getDays();
+
+    for (let i = 0; i < days.length; i++) {
+      const occurrenceIndex = Math.trunc(i / CalendarPage.WEEK_DAY_COUNT);
+
+      days[i].occurrence = CalendarPage.getOccurrenceString(occurrenceIndex);
+    }
+  }
+
+  createReverseOrderOccurrences() {
+    const days = this.getDays();
+    const occurrenceString = CalendarPage.getOccurrenceString(CalendarPage.OCCURRENCE_STRINGS.length - 1);
+
+    for (let i = 1; i <= CalendarPage.WEEK_DAY_COUNT; i++) {
+      days[days.length - i].occurrence = occurrenceString;
     }
   }
 

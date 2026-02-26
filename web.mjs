@@ -77,7 +77,7 @@ function renderDays(calendarPage) {
 
 function renderDay(calendarPage, day) {
   const dayElement = document.getElementById("day-template").content.cloneNode(true);
-  
+
   dayElement.querySelector(".day-number p").innerText = day.getDay();
   if (day.isSunday()) {
     dayElement.querySelector(".day .day-number").classList.add("day-sunday");
