@@ -18,6 +18,19 @@ function setupChosenDate() {
   chosenMonth = now.getMonth();
 }
 
+function setupYearInput() {
+  document.getElementById("year-input").value = chosenYear;
+}
+
+function setupMonthSelect() {
+  const monthSelect = document.getElementById("month-select");
+
+  for (let month = CalendarPage.MONTH_MIN; month <= CalendarPage.MONTH_MAX; month++) {
+    monthSelect.add(new Option(CalendarPage.getMonthString(month), month));
+  }
+  monthSelect.value = chosenMonth;
+}
+
 function setupBackwardButton() {
   document.getElementById("month-backward-button").addEventListener("click", onClickBackwardButton);
 }
@@ -72,6 +85,8 @@ function renderDay(calendarPage, day) {
 //region event listeners
 function onLoadWindow() {
   setupChosenDate();
+  setupYearInput();
+  setupMonthSelect();
   setupBackwardButton();
   setupForwardButton();
   render();
