@@ -97,6 +97,7 @@ function onLoadWindow() {
 
 function onChangeYearInput(event) {
   chosenYear = event.target.value;
+  verifyChosenYear();
   render();
 }
 
@@ -123,6 +124,10 @@ function clearCalendarDaysContainer() {
 
 function changeMonth(delta) {
   chosenMonth += delta;
+  verifyChosenMonth();
+}
+
+function verifyChosenMonth() {
   if (chosenMonth < CalendarPage.MONTH_MIN) {
     chosenMonth = CalendarPage.MONTH_MAX;
     chosenYear--;
@@ -131,6 +136,18 @@ function changeMonth(delta) {
     chosenMonth = CalendarPage.MONTH_MIN;
     chosenYear++;
   }
+  verifyChosenYear();
+}
+
+function verifyChosenYear() {
+  if (chosenYear < CalendarPage.YEAR_MIN) {
+    chosenYear = CalendarPage.YEAR_MIN;
+    chosenMonth = CalendarPage.MONTH_MIN;
+  }
+  if (chosenYear > CalendarPage.MONTH_MAX) {
+    chosenYear = CalendarPage.YEAR_MAX;
+    chosenMonth = CalendarPage.MONTH_MAX;
+  }  
 }
 //endregion
 

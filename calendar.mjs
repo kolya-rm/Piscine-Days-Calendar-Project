@@ -37,6 +37,8 @@ export class Day {
 }
 
 export class CalendarPage {
+  static YEAR_MIN = 1;
+  static YEAR_MAX = 3000;
   static MONTH_MIN = 0;
   static MONTH_MAX = 11;
   static MONTH_STRING = {
