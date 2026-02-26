@@ -7,8 +7,62 @@ import { getGreeting } from "./common.mjs";
 import daysData from "./days.json" with { type: "json" };
 import { Day, CalendarPage } from "./calendar.mjs";
 
-function onLoadWindow() {
+let chosenYear;
+let chosenMonth;
+
+//region prepare
+function setupChosenDate() {
+  const now = new Date();
+
+  chosenYear = now.getFullYear();
+  chosenMonth = now.getMonth();
+}
+
+function setupCalendarPage() {
+  renderCalendarPage();
+}
+//endregion
+
+
+//region render
+function renderCalendarPage() {
+  const calendarPage = new CalendarPage(chosenYear, chosenMonth);
+
+  renderDays(calendarPage.getDays());
+}
+
+function renderDays(dayList) {
+  clearCalendarDaysContainer();
+
+  for (const day of dayList) {
+    renderDay(day);
+  }
+}
+
+function renderDay(day) {
+  const dayElement = document.getElementById("day-template").content.cloneNode(true);
   
+  dayElement.querySelector(".day-number p").innerText = day.getDay();
+
+  getCalendarDaysContainer().appendChild(dayElement);
+}
+//endregion
+
+
+//region event listeners
+function onLoadWindow() {
+  setupChosenDate();
+  setupCalendarPage();
+}
+//endregion
+
+
+//region utilities
+function getCalendarDaysContainer() {
+  return document.getElementById("calendar-body");
+}
+function clearCalendarDaysContainer() {
+  getCalendarDaysContainer().innerHTML = "";
 }
 
 window.onload = onLoadWindow();

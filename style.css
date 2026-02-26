@@ -7,18 +7,18 @@ body {
   margin: auto;
 }
 
-#week-days {
+#calendar-header {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
 }
 
-#month-days {
+#calendar-body {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 10px;
 }
 
-#month-days .day {
+#calendar-body .day {
   border: 1px solid;
   
 }
