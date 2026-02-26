@@ -30,7 +30,7 @@ body {
 #month-text {
   text-align: center;
   font-size: 3vw;
-  text-transform: uppercase;
+  text-transform: capitalize;
   margin: auto;
 }
 

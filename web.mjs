@@ -15,16 +15,30 @@ function setupChosenDate() {
   const now = new Date();
 
   chosenYear = now.getFullYear();
-  chosenMonth = now.getMonth() + 3;
+  chosenMonth = now.getMonth();
 }
 
-function setupCalendarPage() {
-  renderCalendarPage();
+function setupBackwardButton() {
+  document.getElementById("month-backward-button").addEventListener("click", onClickBackwardButton);
+}
+
+function setupForwardButton() {
+  document.getElementById("month-backward-button").addEventListener("click", onClickForwardButton);
 }
 //endregion
 
 
 //region render
+function render() {
+  renderMonthText();
+  renderCalendarPage();
+}
+
+function renderMonthText() {
+  document.getElementById("month-text").innerText = 
+    `${CalendarPage.getMonthString(chosenMonth)} ${chosenYear}`;
+}
+
 function renderCalendarPage() {
   const calendarPage = new CalendarPage(chosenYear, chosenMonth);
 
@@ -58,7 +72,17 @@ function renderDay(calendarPage, day) {
 //region event listeners
 function onLoadWindow() {
   setupChosenDate();
-  setupCalendarPage();
+  setupBackwardButton();
+  setupForwardButton();
+  render();
+}
+
+function onClickBackwardButton() {
+
+}
+
+function onClickForwardButton() {
+  
 }
 //endregion
 
@@ -71,5 +95,6 @@ function getCalendarDaysContainer() {
 function clearCalendarDaysContainer() {
   getCalendarDaysContainer().innerHTML = "";
 }
+//endregion
 
 window.onload = onLoadWindow();

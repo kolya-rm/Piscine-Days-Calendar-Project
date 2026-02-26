@@ -37,12 +37,35 @@ export class Day {
 }
 
 export class CalendarPage {
+  static MONTH_STRING = {
+    0: "January",
+    1: "February",
+    2: "March",
+    3: "April",
+    4: "May",
+    5: "Jun",
+    6: "July",
+    7: "August",
+    8: "September",
+    9: "October",
+    10: "November",
+    11: "December",
+  };
+
   timestamp = 0;
   days = [];
 
+  static getMonthString(month) {
+    return this.MONTH_STRING[month];
+  }
+
+  static getDayCount(year, month) {
+    return 33 - new Date(year, month, 33).getDate();
+  }
+
   constructor(year, month) {
-    this.timestamp  = new Date();
-    
+    this.timestamp = new Date();
+
     this.timestamp.setFullYear(year);
     this.timestamp.setMonth(month);
 
@@ -62,11 +85,16 @@ export class CalendarPage {
   }
 
   createPreviousMonthDays() {
-    let previousMonthDay = CalendarPage.getDayCount(this.getYear(), this.getMonth() - 1);
+    let previousMonthDay = CalendarPage.getDayCount(
+      this.getYear(),
+      this.getMonth() - 1,
+    );
     let weekDay = this.getDays()[0].getWeekDay();
-  
+
     while (--weekDay >= 0) {
-      this.getDays().unshift(new Day(this.getYear(), this.getMonth() - 1, previousMonthDay--));
+      this.getDays().unshift(
+        new Day(this.getYear(), this.getMonth() - 1, previousMonthDay--),
+      );
     }
   }
 
@@ -75,7 +103,9 @@ export class CalendarPage {
     let weekday = this.getDays()[this.getDays().length - 1].getWeekDay();
 
     while (++weekday <= 6) {
-      this.getDays().push(new Day(this.getYear(), this.getMonth() + 1, nextMonthDay++));
+      this.getDays().push(
+        new Day(this.getYear(), this.getMonth() + 1, nextMonthDay++),
+      );
     }
   }
 
@@ -96,10 +126,8 @@ export class CalendarPage {
   }
 
   isCurrentMonthDay(day) {
-    return this.getYear() === day.getYear() && this.getMonth() === day.getMonth();
-  }
-
-  static getDayCount(year, month) {
-    return 33 - new Date(year, month, 33).getDate();
+    return (
+      this.getYear() === day.getYear() && this.getMonth() === day.getMonth()
+    );
   }
 }
