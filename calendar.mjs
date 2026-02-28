@@ -89,7 +89,7 @@ export class CalendarPage {
   }
 
   static getDayCount(year, month) {
-    return 33 - new Date(year, month, 33).getDate();
+    return new Date(year, ++month, 0).getDate();
   }
 
   static getOccurrenceString(index) {
