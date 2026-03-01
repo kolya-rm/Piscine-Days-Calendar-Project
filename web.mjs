@@ -5,7 +5,7 @@
 
 import { getGreeting } from "./common.mjs";
 import daysData from "./days.json" with { type: "json" };
-import { Day, CalendarPage } from "./calendar.mjs";
+import { CalendarPage } from "./calendar-page.mjs";
 
 
 let chosenYear;
