@@ -46,16 +46,28 @@ export class CalendarPage {
     return this.OCCURRENCE_STRINGS[index];
   }
 
-  constructor(year, month) {
+  constructor() {
     this.timestamp = new Date();
+    this.createDays();
+  }
 
-    this.timestamp.setFullYear(year);
+  updateMonth(month) {
     this.timestamp.setMonth(month);
+    this.createDays();  
+  }
 
+  updateYear(year) {
+    this.timestamp.setYear(year);
+    this.createDays();
+  }
+
+  changeMonth(delta) {
+    this.timestamp.setMonth(this.timestamp.getMonth() + delta);
     this.createDays();
   }
 
   createDays() {
+    this.days = [];
     this.createCurrentMonthDays();
     this.createDirectOrderOccurrences();
     this.createReverseOrderOccurrences();

@@ -1,35 +1,38 @@
 import { CalendarPage } from "./calendar-page.mjs";
 
 
-let chosenYear;
-let chosenMonth;
+const calendarPage = new CalendarPage();
+const yearInput = document.getElementById("year-input");
+const monthSelect = document.getElementById("month-select");
+const backwardButton = document.getElementById("month-backward-button");
+const frowardButton = document.getElementById("month-forward-button");
+const calendarDaysContainer = document.getElementById("calendar-body");
+
 
 //region prepare
-function setupChosenDate() {
-  const now = new Date();
+function setupPageElements() {
+  yearInput.addEventListener("change", (event) => {
+    calendarPage.updateYear(event.target.value);
+    render();
+  });
 
-  chosenYear = now.getFullYear();
-  chosenMonth = now.getMonth();
-}
-
-function setupYearInput() {
-  getYearInput().addEventListener("change", onChangeYearInput);
-}
-
-function setupMonthSelect() {
   for (let month = CalendarPage.MONTH_MIN; month <= CalendarPage.MONTH_MAX; month++) {
-    getMonthSelect().add(new Option(CalendarPage.getMonthString(month), month));
+    monthSelect.add(new Option(CalendarPage.getMonthString(month), month));
   }
+  monthSelect.addEventListener("change", (event) => {
+    calendarPage.updateMonth(event.target.value);
+    render();
+  });
 
-  getMonthSelect().addEventListener("change", onChangeMonthSelect);
-}
+  backwardButton.addEventListener("click", () => {
+    calendarPage.changeMonth(-1);
+    render();
+  });
 
-function setupBackwardButton() {
-  getBackwardButton().addEventListener("click", onClickBackwardButton);
-}
-
-function setupForwardButton() {
-  getForwardButton().addEventListener("click", onClickForwardButton);
+  frowardButton.addEventListener("click", () => {
+    calendarPage.changeMonth(1);
+    render();
+  });
 }
 //endregion
 
@@ -39,37 +42,31 @@ function render() {
   renderYearInput();
   renderMonthSelect();
   renderMonthText();
-  renderCalendarPage();
+  renderCalendarDays();
 }
 
 function renderYearInput() {
-  getYearInput().value = chosenYear;
+  yearInput.value = calendarPage.getYear();
 }
 
 function renderMonthSelect() {
-  getMonthSelect().value = chosenMonth;
+  monthSelect.value = calendarPage.getMonth();
 }
 
 function renderMonthText() {
-  document.getElementById("month-text").innerText = 
-    `${CalendarPage.getMonthString(chosenMonth)} ${chosenYear}`;
+  document.getElementById("month-text").innerText =
+    `${calendarPage.getMonthString()} ${calendarPage.getYear()}`;
 }
 
-function renderCalendarPage() {
-  const calendarPage = new CalendarPage(chosenYear, chosenMonth);
-
-  renderDays(calendarPage);
-}
-
-function renderDays(calendarPage) {
-  clearCalendarDaysContainer();
+function renderCalendarDays() {
+  calendarDaysContainer.innerHTML = "";
 
   for (const day of calendarPage.getDays()) {
-    renderDay(calendarPage, day);
+    renderCalendarDay(day);
   }
 }
 
-function renderDay(calendarPage, day) {
+function renderCalendarDay(day) {
   const dayElement = document.getElementById("day-template").content.cloneNode(true);
 
   dayElement.querySelector(".day-number p").innerText = day.getDay();
@@ -83,95 +80,15 @@ function renderDay(calendarPage, day) {
     dayElement.querySelector(".day-description p").innerText = day.getDescription();
   }
 
-  getCalendarDaysContainer().appendChild(dayElement);
+  calendarDaysContainer.appendChild(dayElement);
 }
 //endregion
 
 
 //region event listeners
 function onLoadWindow() {
-  setupChosenDate();
-  setupYearInput();
-  setupMonthSelect();
-  setupBackwardButton();
-  setupForwardButton();
+  setupPageElements();
   render();
-}
-
-function onChangeYearInput(event) {
-  chosenYear = event.target.value;
-  verifyChosenYear();
-  render();
-}
-
-function onChangeMonthSelect(event) {
-  chosenMonth = event.target.value;
-  render();
-}
-
-function onClickBackwardButton() {
-  changeMonth(-1);
-  render();
-}
-
-function onClickForwardButton() {
-  changeMonth(1);
-  render()
-}
-//endregion
-
-
-//region utilities
-function getYearInput() {
-  return document.getElementById("year-input");
-}
-
-function getMonthSelect() {
-  return document.getElementById("month-select");
-}
-
-function getBackwardButton() {
-  return document.getElementById("month-backward-button");
-}
-
-function getForwardButton() {
-  return document.getElementById("month-forward-button");
-}
-
-function getCalendarDaysContainer() {
-  return document.getElementById("calendar-body");
-}
-
-function clearCalendarDaysContainer() {
-  getCalendarDaysContainer().innerHTML = "";
-}
-
-function changeMonth(delta) {
-  chosenMonth += delta;
-  verifyChosenMonth();
-}
-
-function verifyChosenMonth() {
-  if (chosenMonth < CalendarPage.MONTH_MIN) {
-    chosenMonth = CalendarPage.MONTH_MAX;
-    chosenYear--;
-  }
-  if (chosenMonth > CalendarPage.MONTH_MAX) {
-    chosenMonth = CalendarPage.MONTH_MIN;
-    chosenYear++;
-  }
-  verifyChosenYear();
-}
-
-function verifyChosenYear() {
-  if (chosenYear < CalendarPage.YEAR_MIN) {
-    chosenYear = CalendarPage.YEAR_MIN;
-    chosenMonth = CalendarPage.MONTH_MIN;
-  }
-  if (chosenYear > CalendarPage.YEAR_MAX) {
-    chosenYear = CalendarPage.YEAR_MAX;
-    chosenMonth = CalendarPage.MONTH_MAX;
-  }  
 }
 //endregion
 
