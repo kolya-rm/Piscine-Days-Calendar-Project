@@ -5,8 +5,7 @@ import { CalendarDay } from "./calendar-day.mjs";
 export class CalendarPage {
   static DATE_MIN = new Date("0001-02-01");
   static DATE_MAX = new Date("3000-12-31");
-  static MONTH_MIN = 0;
-  static MONTH_MAX = 11;
+  static YEAR_MAX_LENGTH = this.DATE_MAX.getFullYear().toString().length;
   static MONTH_STRINGS = [
     "January",
     "February",
@@ -53,7 +52,6 @@ export class CalendarPage {
   constructor() {
     this.timestamp = new Date();
     this.createDays();
-  
   }
   //endregion
 
@@ -77,6 +75,7 @@ export class CalendarPage {
     this.createDays();
   }
   //endregion
+
 
   //region inner logic
   createDays() {

@@ -15,6 +15,11 @@ function setupPageElements() {
     calendarPage.updateYear(yearInput.value);
     render();
   });
+  yearInput.addEventListener("input", () => {
+    if(yearInput.value.length > CalendarPage.YEAR_MAX_LENGTH) {
+      yearInput.value = yearInput.value.slice(0, CalendarPage.YEAR_MAX_LENGTH);
+    }
+  });
 
   for (let month = 0; month < CalendarPage.MONTH_STRINGS.length; month++) {
     monthSelect.add(new Option(CalendarPage.getMonthString(month), month));
