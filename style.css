@@ -14,18 +14,20 @@ body {
 
 #calendar-control {
   display: grid;
-  grid-template-columns: 5fr 1fr 1fr;
+  grid-template-columns: 4.6fr 1.2fr 1.2fr;
 }
 
 #calendar-year-input {
   width: 100%;
   height: 100%;
   display: flex;
+  gap: 10px;
+  justify-content: center;
   align-items: center;
 }
 
 #year-input {
-  width: 80%;
+  width: 40%;
   height: 20%;
   box-sizing: border-box;
   font-size: 1vw;;
@@ -35,11 +37,13 @@ body {
   width: 100%;
   height: 100%;
   display: flex;
+  gap: 10px;
+  justify-content: center;
   align-items: center;
 }
 
 #month-select {
-  width: 80%;
+  width: 60%;
   height: 20%;
   box-sizing: border-box;
   font-size: 1vw;;
