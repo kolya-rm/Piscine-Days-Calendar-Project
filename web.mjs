@@ -11,16 +11,16 @@ const calendarDaysContainer = document.getElementById("calendar-body");
 
 //region prepare
 function setupPageElements() {
-  yearInput.addEventListener("change", (event) => {
-    calendarPage.updateYear(event.target.value);
+  yearInput.addEventListener("change", () => {
+    calendarPage.updateYear(yearInput.value);
     render();
   });
 
-  for (let month = CalendarPage.MONTH_MIN; month <= CalendarPage.MONTH_MAX; month++) {
+  for (let month = 0; month < CalendarPage.MONTH_STRINGS.length; month++) {
     monthSelect.add(new Option(CalendarPage.getMonthString(month), month));
   }
-  monthSelect.addEventListener("change", (event) => {
-    calendarPage.updateMonth(event.target.value);
+  monthSelect.addEventListener("change", () => {
+    calendarPage.updateMonth(monthSelect.value);
     render();
   });
 

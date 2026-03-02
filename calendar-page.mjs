@@ -3,8 +3,8 @@ import { CalendarDay } from "./calendar-day.mjs";
 
 
 export class CalendarPage {
-  static YEAR_MIN = 1;
-  static YEAR_MAX = 3000;
+  static DATE_MIN = new Date("0001-02-01");
+  static DATE_MAX = new Date("3000-12-31");
   static MONTH_MIN = 0;
   static MONTH_MAX = 11;
   static MONTH_STRINGS = [
@@ -34,6 +34,7 @@ export class CalendarPage {
   timestamp = 0;
   days = [];
 
+  //regin static
   static getMonthString(month) {
     return this.MONTH_STRINGS[month];
   }
@@ -45,27 +46,39 @@ export class CalendarPage {
   static getOccurrenceString(index) {
     return this.OCCURRENCE_STRINGS[index];
   }
+  //endregion
 
+
+  //region constructor
   constructor() {
     this.timestamp = new Date();
     this.createDays();
+  
   }
+  //endregion
 
+
+  //region interface
   updateMonth(month) {
     this.timestamp.setMonth(month);
-    this.createDays();  
+    this.validateDate();
+    this.createDays();
   }
 
   updateYear(year) {
-    this.timestamp.setYear(year);
+    this.timestamp.setFullYear(year);
+    this.validateDate();
     this.createDays();
   }
 
   changeMonth(delta) {
     this.timestamp.setMonth(this.timestamp.getMonth() + delta);
+    this.validateDate();
     this.createDays();
   }
+  //endregion
 
+  //region inner logic
   createDays() {
     this.days = [];
     this.createCurrentMonthDays();
@@ -84,33 +97,32 @@ export class CalendarPage {
 
   createDirectOrderOccurrences() {
     const days = this.getDays();
-
     for (let i = 0; i < days.length; i++) {
-      const occurrenceIndex = Math.trunc(i / CalendarPage.WEEK_DAY_COUNT);
-
+      let occurrenceIndex = Math.trunc(i / CalendarPage.WEEK_DAY_COUNT);
       days[i].occurrence = CalendarPage.getOccurrenceString(occurrenceIndex);
     }
   }
 
   createReverseOrderOccurrences() {
-    const days = this.getDays();
-    const occurrenceString = CalendarPage.getOccurrenceString(
+    let days = this.getDays();
+    let occurrenceString = CalendarPage.getOccurrenceString(
       CalendarPage.OCCURRENCE_STRINGS.length - 1,
     );
-
     for (let i = 1; i <= CalendarPage.WEEK_DAY_COUNT; i++) {
       days[days.length - i].occurrence = occurrenceString;
     }
   }
 
   createCommemorativeDates() {
-    for (const day of this.getDays()) {
-      for (const commemorativeDay of commemorativeDays) {
-        if (this.getMonthString() === commemorativeDay.monthName &&
+    for (let day of this.getDays()) {
+      for (let commemorativeDay of commemorativeDays) {
+        if (
+          this.getMonthString() === commemorativeDay.monthName &&
           day.getWeekDayString() === commemorativeDay.dayName &&
-          day.getOccurrence() === commemorativeDay.occurrence) {
-            day.description = commemorativeDay.name;
-          }
+          day.getOccurrence() === commemorativeDay.occurrence
+        ) {
+          day.description = commemorativeDay.name;
+        }
       }
     }
   }
@@ -124,7 +136,11 @@ export class CalendarPage {
 
     while (--weekDay >= 0) {
       this.getDays().unshift(
-        new CalendarDay(this.getYear(), this.getMonth() - 1, previousMonthDay--),
+        new CalendarDay(
+          this.getYear(),
+          this.getMonth() - 1,
+          previousMonthDay--,
+        ),
       );
     }
   }
@@ -140,6 +156,17 @@ export class CalendarPage {
     }
   }
 
+  validateDate() {
+    if (this.timestamp.getTime() < CalendarPage.DATE_MIN.getTime()) {
+      this.timestamp.setTime(CalendarPage.DATE_MIN);
+    }
+    if (this.timestamp.getTime() > CalendarPage.DATE_MAX.getTime()) {
+      this.timestamp.setTime(CalendarPage.DATE_MAX);
+    }
+  }
+  //endregion
+
+  //region getters
   getYear() {
     return this.timestamp.getFullYear();
   }
@@ -165,4 +192,5 @@ export class CalendarPage {
       this.getYear() === day.getYear() && this.getMonth() === day.getMonth()
     );
   }
+  //endregion
 }
