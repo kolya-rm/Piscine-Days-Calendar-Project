@@ -79,7 +79,7 @@ export class CalendarPage {
 
   //region inner logic
   createDays() {
-    this.days = [];
+    this.days.length = 0;
     this.createCurrentMonthDays();
     this.createDirectOrderOccurrences();
     this.createReverseOrderOccurrences();
@@ -104,9 +104,7 @@ export class CalendarPage {
 
   createReverseOrderOccurrences() {
     let days = this.getDays();
-    let occurrenceString = CalendarPage.getOccurrenceString(
-      CalendarPage.OCCURRENCE_STRINGS.length - 1,
-    );
+    let occurrenceString = CalendarPage.getOccurrenceString(CalendarPage.OCCURRENCE_STRINGS.length - 1);
     for (let i = 1; i <= CalendarPage.WEEK_DAY_COUNT; i++) {
       days[days.length - i].occurrence = occurrenceString;
     }
@@ -127,20 +125,11 @@ export class CalendarPage {
   }
 
   createPreviousMonthDays() {
-    let previousMonthDay = CalendarPage.getDayCount(
-      this.getYear(),
-      this.getMonth() - 1,
-    );
+    let previousMonthDay = CalendarPage.getDayCount(this.getYear(), this.getMonth() - 1);
     let weekDay = this.getDays()[0].getWeekDay();
 
     while (--weekDay >= 0) {
-      this.getDays().unshift(
-        new CalendarDay(
-          this.getYear(),
-          this.getMonth() - 1,
-          previousMonthDay--,
-        ),
-      );
+      this.getDays().unshift(new CalendarDay(this.getYear(), this.getMonth() - 1, previousMonthDay--));
     }
   }
 
@@ -164,6 +153,7 @@ export class CalendarPage {
     }
   }
   //endregion
+
 
   //region getters
   getYear() {
