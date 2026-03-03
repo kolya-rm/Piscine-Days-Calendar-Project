@@ -17,6 +17,7 @@ describe("CalendarPage static functions", () =>{
   });
 });
 
+
 describe("CalendarPage class instance getter functions", () =>{
 
   let calendarPage = new CalendarPage(2026, 2);
@@ -82,6 +83,7 @@ describe("CalendarPage class instance month manipulate functions", () =>{
   });
 });
 
+
 describe("CalendarPage class commemorative days create tests", () => {
   
   test("Should correctly set Ada Lovelace day in the year 2026", () => {
@@ -113,4 +115,3 @@ describe("CalendarPage class commemorative days create tests", () => {
     );
   });
 });
-
