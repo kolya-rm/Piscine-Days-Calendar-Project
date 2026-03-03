@@ -35,7 +35,7 @@ export class CalendarPage {
 
   //regin static
   static getMonthString(month) {
-    return this.MONTH_STRINGS[month];
+    return CalendarPage.MONTH_STRINGS[month];
   }
 
   static getDayCount(year, month) {
@@ -43,7 +43,7 @@ export class CalendarPage {
   }
 
   static getOccurrenceString(index) {
-    return this.OCCURRENCE_STRINGS[index];
+    return CalendarPage.OCCURRENCE_STRINGS[index];
   }
   //endregion
 
