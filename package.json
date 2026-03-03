@@ -2,9 +2,6 @@
   "name": "project-days-calendar",
   "version": "1.0.0",
   "scripts": {
-    "test": "jest"
-  },
-  "devDependencies": {
-    "jest": "^30.2.0"
+    "test": "node common.test.mjs"
   }
 }
