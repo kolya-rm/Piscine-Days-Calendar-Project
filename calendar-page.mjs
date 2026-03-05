@@ -137,7 +137,7 @@ export class CalendarPage {
     let nextMonthDay = 1;
     let weekday = this.getDays()[this.getDays().length - 1].getWeekDay();
 
-    while (++weekday <= 6) {
+    while (++weekday < CalendarPage.WEEK_DAY_COUNT) {
       this.getDays().push(
         new CalendarDay(this.getYear(), this.getMonth() + 1, nextMonthDay++),
       );
