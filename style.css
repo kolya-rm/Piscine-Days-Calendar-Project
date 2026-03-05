@@ -1,0 +1,132 @@
+:root {
+  --grid-gap: 10px;
+  --text-padding: 10px;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#calendar {
+  width: 80%;
+  margin: auto;
+}
+
+#calendar-control {
+  display: grid;
+  grid-template-columns: 4.6fr 1.2fr 1.2fr;
+}
+
+#calendar-year-input {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+#year-input {
+  width: 40%;
+  height: 20%;
+  box-sizing: border-box;
+  font-size: 1vw;;
+}
+
+#calendar-month-select {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+#month-select {
+  width: 60%;
+  height: 20%;
+  box-sizing: border-box;
+  font-size: 1vw;;
+}
+
+#calendar-header {
+  display: grid;
+  grid-template-rows: 3fr 3fr 1fr;
+}
+
+#month-header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.5fr 0.5fr 3fr 0.5fr 1.5fr;
+}
+
+#month-backward-button, #month-forward-button {
+  margin: auto;
+}
+
+#month-text {
+  text-align: center;
+  font-size: 3vw;
+  text-transform: capitalize;
+  margin: auto;
+}
+
+#week-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--grid-gap);
+  text-transform: capitalize;
+}
+
+.week-day {
+  font-size: 1.5vw;
+  text-align: right;
+  padding: var(--text-padding);
+
+}
+
+#calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--grid-gap);
+}
+
+#calendar-body .day {
+  border: 1px solid;
+  
+}
+
+.day {
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  aspect-ratio:
+   1 / 1;
+  padding: var(--text-padding);
+  background-color: azure;
+}
+
+.day-non-current-month {
+  opacity: 0.2;
+}
+
+.day-number p {
+  text-align: right;
+  font-size: 3vw;
+  margin: 0px;
+}
+
+.day-description {
+  align-items: center;
+  align-content: center;
+}
+
+.day-description p {
+  opacity: 0.6;
+  font-size: 1vw;
+  text-align: center;
+}
+
+.day-sunday {
+  color: #8B0000;
+}
+

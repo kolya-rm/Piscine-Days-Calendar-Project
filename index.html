@@ -1,9 +1,145 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <script type="module" src="common.mjs"></script>
+        <title>Days calendar</title>
         <script type="module" src="web.mjs"></script>
+        <link rel="stylesheet" href="style.css">
+        <meta name="charset" content="UTF-8"/>
+        <meta name="description" content="Migracode Barcelona Days calendar piscine project" />
     </head>
     <body>
+        <header></header>
+        <main>
+            <section id="calendar">
+                <div id="calendar-header">
+                    <div id="calendar-control">
+                        <div></div>
+                        <div id="calendar-year-input">
+                            <label for="year-input">Year:</label>
+                            <input id="year-input" name="year" type="number"/>
+                        </div>
+                        <div id="calendar-month-select">
+                            <label for="month-select">Month:</label>
+                            <select id="month-select" name="month"></select>
+                        </div>
+                    </div>
+                    <div id="month-header">
+                        <div></div>
+                        <div id="month-backward-button">
+                            <button id="backward-btn"><<</button>
+                        </div>
+                        <div id="month-text">
+                            <p>Month Year</p>
+                        </div>
+                        <div id="month-forward-button">
+                            <button id="forward-btn">>></button>
+                        </div>
+                        <div></div>
+                    </div>
+                    <div id="week-header">
+                        <div class="week-day day-sunday">sun</div>
+                        <div class="week-day">mon</div>
+                        <div class="week-day">tue</div>
+                        <div class="week-day">wed</div>
+                        <div class="week-day">thu</div>
+                        <div class="week-day">fri</div>
+                        <div class="week-day">sat</div>
+                    </div>
+                </div>
+                <div id="calendar-body">
+                    <div class="day day-sunday">
+                        <div class="day-number">
+                            <p>1</p>
+                        </div>
+                        <div class="day-description">
+                            <p>Ada Lovelace day</p>
+                        </div>
+                    </div>
+                    <div class="day">
+                        <div class="day-number">
+                            <p>2</p>
+                        </div>
+                        <div class="day-description">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="day">
+                        <div class="day-number">
+                            <p>3</p>
+                        </div>
+                        <div class="day-description">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="day">
+                        <div class="day-number">
+                            <p>4</p>
+                        </div>
+                        <div class="day-description">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="day">
+                        <div class="day-number">
+                            <p>5</p>
+                        </div>
+                        <div class="day-description">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="day">
+                        <div class="day-number">
+                            <p>6</p>
+                        </div>
+                        <div class="day-description">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="day">
+                        <div class="day-number">
+                            <p>7</p>
+                        </div>
+                        <div class="day-description">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="day day-sunday day-non-current-month">
+                        <div class="day-number">
+                            <p>8</p>
+                        </div>
+                        <div class="day-description">
+                            <p>Spaghetti day</p>
+                        </div>
+                    </div>
+                    <div class="day day-non-current-month">
+                        <div class="day-number">
+                            <p>9</p>
+                        </div>
+                        <div class="day-description">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="day">
+                        <div class="day-number">
+                            <p>10</p>
+                        </div>
+                        <div class="day-description">
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer></footer>
+        <template id="day-template">
+            <div class="day">
+                <div class="day-number">
+                    <p></p>
+                </div>
+                <div class="day-description">
+                    <p></p>
+                </div>
+            </div>
+        </template>    
     </body>
 </html>
