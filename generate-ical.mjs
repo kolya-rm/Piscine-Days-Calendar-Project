@@ -1,7 +1,9 @@
-// This is a placeholder file which shows how you can access functions and data defined in other files. You can delete the contents of the file once you have understood how it works.
-// It can be run with `node`.
+ import { IcalGEnerator } from "./ical-generator.mjs";
 
-import { getGreeting } from "./common.mjs";
-import daysData from "./days.json" with { type: "json" };
 
-console.log(`{getGreeting()} - there are ${daysData.length} known days`);
+ let generator = new IcalGEnerator();
+
+ generator.setStartMonth(2025, 0);
+ generator.setLastMonth(2026, 11);
+
+ generator.generateCommemorableDays();

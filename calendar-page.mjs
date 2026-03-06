@@ -69,6 +69,13 @@ export class CalendarPage {
     this.createDays();
   }
 
+  updateYearMonth(year, month) {
+    this.timestamp.setFullYear(year);
+    this.timestamp.setMonth(month);
+    this.validateDate();
+    this.createDays();
+  }
+
   changeMonth(delta) {
     this.timestamp.setMonth(this.timestamp.getMonth() + delta);
     this.validateDate();
@@ -156,6 +163,10 @@ export class CalendarPage {
 
 
   //region getters
+  getTime() {
+    return this.timestamp.getTime();
+  }
+  
   getYear() {
     return this.timestamp.getFullYear();
   }
