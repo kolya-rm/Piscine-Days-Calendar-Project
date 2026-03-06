@@ -1,3 +1,5 @@
+import { get } from "node:http";
+
 export class CalendarDay {
   timestamp = 0;
   occurrence = "";
@@ -45,6 +47,28 @@ export class CalendarDay {
 
   getDateString() {
     return `${this.getYear()}-${("" + this.getMonth()).padStart(2, "0")}-${(
-      "" + this.getDay()).padStart(2, "0")} week day: ${this.getWeekDay()}`;
+      "" + this.getDay()
+    ).padStart(2, "0")} week day: ${this.getWeekDay()}`;
+  }
+
+  getIcalDayString() {
+    return this.timestamp.toISOString().slice(0, 10).replace(/-/g, "");
+  }
+
+  getIcalNextDayString() {
+    let nextDay = new CalendarDay(
+      this.getYear(),
+      this.getMonth(),
+      this.getDay() + 1,
+    );
+    return nextDay.getIcalDayString();
+  }
+
+  getIcalTimestampString() {
+    return this.timestamp.toISOString().slice(0, 19).replace(/[-:]/g, "");
+  }
+
+  getTimestampString() {
+    return this.timestamp.toISOString().replace(/[-:\.]/g, "");
   }
 }

@@ -1,12 +1,21 @@
-import { writeFileSync, appendFileSync} from "node:fs";
+import { writeFileSync, appendFileSync, appendFile} from "node:fs";
 import { CalendarPage } from "./calendar-page.mjs";
 
 const FILE_NAME = "days.ics";
 
 const CALENDAR_BEGIN_STRING = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Migracode BCN//Commemorable Calendar 1.0//EN\nCALSCALE:GREGORIAN\n";
 const CALENDAR_END_STRING = "END:VCALENDAR\n";
+
 const DAY_START_STRING = "BEGIN:VEVENT\n";
 const DAY_END_STRING = "END:VEVENT\n";
+const DAY_UID_STRING_BEGIN = "UID:";
+const DAY_UID_STRING_END = "-kolya.rm@migracode.org\n";
+const DAY_TRANSPARENCY_STRING = "TRANSP:TRANSPARENT\n";
+const DAY_SUMMARY_STRING_BEGIN = "SUMMARY:";
+const DAY_DTSTART_STRING_BEGIN = "DTSTART:";
+const DAY_DTEND_STRING_BEGIN = "DTEND:";
+const DAY_DTSTAMP_STRING_BEGIN = "DTSTAMP:";
+const DAY_CATEGORY_STRING = "CATEGORIES: Migracode iCal commemorable calendar day\n";
 
 export class IcalGenerator {
 
@@ -34,21 +43,22 @@ export class IcalGenerator {
   }
 
   print() {
-    try {
-      writeFileSync(FILE_NAME, CALENDAR_BEGIN_STRING);
-      this.printDays();
-      appendFileSync(FILE_NAME, CALENDAR_END_STRING);
-    } catch (error) {
-      console.error(error);
-    }
+    writeSync(CALENDAR_BEGIN_STRING);
+    this.printDays();
+    appendFileSync(FILE_NAME, CALENDAR_END_STRING);
   }
 
   printDays() {
-    try {
-      appendFileSync(FILE_NAME, DAY_START_STRING);
-      appendFileSync(FILE_NAME, DAY_END_STRING);
-    } catch (error) {
-      console.error(error);
+    for(let day of this.commemorableDays) {
+      appendSync(DAY_START_STRING);
+      appendSync(`${DAY_SUMMARY_STRING_BEGIN}${day.description}\n`);
+      appendSync(`${DAY_UID_STRING_BEGIN}${day.getTimestampString()}${DAY_UID_STRING_END}`);
+      appendSync(DAY_TRANSPARENCY_STRING);
+      appendSync(`${DAY_DTSTART_STRING_BEGIN}${day.getIcalDayString()}\n`);
+      appendSync(`${DAY_DTEND_STRING_BEGIN}${day.getIcalNextDayString()}\n`);
+      appendSync(`${DAY_DTSTAMP_STRING_BEGIN}${day.getIcalTimestampString()}\n`);
+      appendSync(DAY_CATEGORY_STRING);
+      appendSync(DAY_END_STRING);
     }
   }
   //endregion
@@ -64,4 +74,21 @@ export class IcalGenerator {
     console.log(this.lastMonth.toDateString());
   }
   //endregion
+}
+
+function writeSync(string) {
+  try {
+    writeFileSync(FILE_NAME, string);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function appendSync(string) {
+  try {
+    appendFileSync(FILE_NAME, string);
+  } 
+  catch (error) {
+    console.log(error);
+  }
 }
