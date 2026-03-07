@@ -1,5 +1,3 @@
-import { get } from "node:http";
-
 export class CalendarDay {
   timestamp = 0;
   occurrence = "";
