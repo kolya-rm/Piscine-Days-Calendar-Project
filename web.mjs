@@ -25,8 +25,10 @@ function setupPageElements() {
     }
   });
 
-  for (let month = 0; month < CalendarPage.MONTH_STRINGS.length; month++) {
-    monthSelect.add(new Option(CalendarPage.getMonthString(month), month));
+  for (let month = 0; month < CalendarPage.MONTH_IN_YEAR; month++) {
+    const date = new Date();
+    date.setMonth(month);
+    monthSelect.add(new Option(date.toLocaleString("en-US", { month: "long" }), month));
   }
   monthSelect.addEventListener("change", () => {
     calendarPage.updateMonth(monthSelect.value);

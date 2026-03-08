@@ -6,21 +6,8 @@ export class CalendarPage {
   static DATE_MIN = new Date("0001-02-01");
   static DATE_MAX = new Date("3000-12-31");
   static YEAR_MAX_LENGTH = this.DATE_MAX.getFullYear().toString().length;
-  static MONTH_STRINGS = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  static WEEK_DAY_COUNT = 7;
+  static MONTH_IN_YEAR = 12;
+  static DAY_IN_WEEK = 7;
   static OCCURRENCE_STRINGS = [
     "first",
     "second",
@@ -36,16 +23,8 @@ export class CalendarPage {
 
 
   //regin static
-  static getMonthString(month) {
-    return CalendarPage.MONTH_STRINGS[month];
-  }
-
   static getDayCount(year, month) {
     return new Date(year, ++month, 0).getDate();
-  }
-
-  static getOccurrenceString(index) {
-    return CalendarPage.OCCURRENCE_STRINGS[index];
   }
   //endregion
 
@@ -106,15 +85,15 @@ export class CalendarPage {
   #createDirectOrderOccurrences() {
     const days = this.getDays();
     for (let i = 0; i < days.length; i++) {
-      let occurrenceIndex = Math.trunc(i / CalendarPage.WEEK_DAY_COUNT);
-      days[i].setOccurrence(CalendarPage.getOccurrenceString(occurrenceIndex));
+      let occurrenceIndex = Math.trunc(i / CalendarPage.DAY_IN_WEEK);
+      days[i].setOccurrence(CalendarPage.OCCURRENCE_STRINGS[occurrenceIndex]);
     }
   }
 
   #createReverseOrderOccurrences() {
     const days = this.getDays();
-    const occurrence = CalendarPage.getOccurrenceString(CalendarPage.OCCURRENCE_STRINGS.length - 1);
-    for (let i = 1; i <= CalendarPage.WEEK_DAY_COUNT; i++) {
+    const occurrence = CalendarPage.OCCURRENCE_STRINGS[CalendarPage.OCCURRENCE_STRINGS.length - 1];
+    for (let i = 1; i <= CalendarPage.DAY_IN_WEEK; i++) {
       days[days.length - i].setOccurrence(occurrence);
     }
   }
@@ -146,7 +125,7 @@ export class CalendarPage {
     let nextMonthDay = 1;
     let weekday = this.getDays()[this.getDays().length - 1].getWeekDay();
 
-    while (++weekday < CalendarPage.WEEK_DAY_COUNT) {
+    while (++weekday < CalendarPage.DAY_IN_WEEK) {
       this.getDays().push(
         new CalendarDay(this.getYear(), this.getMonth() + 1, nextMonthDay++),
       );
@@ -178,7 +157,7 @@ export class CalendarPage {
   }
 
   getMonthString() {
-    return CalendarPage.getMonthString(this.getMonth());
+    return this.#timestamp.toLocaleString("en-US", { month: "long" });
   }
 
   getDays() {

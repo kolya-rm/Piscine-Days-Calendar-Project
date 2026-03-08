@@ -50,12 +50,6 @@ export class CalendarDay {
     return this.getWeekDay() === 0;
   }
 
-  getDateString() {
-    return `${this.getYear()}-${("" + this.getMonth()).padStart(2, "0")}-${(
-      "" + this.getDay()
-    ).padStart(2, "0")} week day: ${this.getWeekDay()}`;
-  }
-
   getIcalDayString() {
     return this.#timestamp.toISOString().slice(0, 10).replace(/-/g, "");
   }
