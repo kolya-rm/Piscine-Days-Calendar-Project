@@ -160,8 +160,6 @@ export class CalendarPage {
     }
     catch (error) {
       console.error("Error fetching description data:", error)
-    }
-    finally {
       return "Bulk description: couldn't fetch data";
     }
   }

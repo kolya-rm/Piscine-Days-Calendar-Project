@@ -35,6 +35,7 @@ export class CalendarDay {
   getOccurrence() {
     return this.#occurrence;
   }
+  
   setOccurrence(occurrence) {
     this.#occurrence = occurrence;
   }

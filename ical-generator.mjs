@@ -11,6 +11,7 @@ const DAY_START_STRING = "BEGIN:VEVENT\n";
 const DAY_END_STRING = "END:VEVENT\n";
 const DAY_UID_STRING_BEGIN = "UID:";
 const DAY_UID_STRING_END = "-kolya.rm@migracode.org\n";
+const DAY_DESCRIPTION_BEGIN = "DESCRIPTION:";
 const DAY_TRANSPARENCY_STRING = "TRANSP:TRANSPARENT\n";
 const DAY_SUMMARY_STRING_BEGIN = "SUMMARY:";
 const DAY_DTSTART_STRING_BEGIN = "DTSTART:";
@@ -52,16 +53,13 @@ export class IcalGenerator {
   #printDays() {
     for (const day of this.#commemorativeDays) {
       appendSync(DAY_START_STRING);
-      appendSync(`${DAY_SUMMARY_STRING_BEGIN}${day.getName()}\n`);
-      appendSync(
-        `${DAY_UID_STRING_BEGIN}${day.getTimestampString()}${DAY_UID_STRING_END}`,
-      );
+      appendSync(`${DAY_SUMMARY_STRING_BEGIN + day.getName()}\n`);
+      appendSync(`${DAY_UID_STRING_BEGIN + day.getTimestampString()+ DAY_UID_STRING_END}`);
+      appendSync(`${(DAY_DESCRIPTION_BEGIN + day.getDescription()).replace(/(.{72})/g,"$1\r\n ").trim()}\n`);
       appendSync(DAY_TRANSPARENCY_STRING);
-      appendSync(`${DAY_DTSTART_STRING_BEGIN}${day.getIcalDayString()}\n`);
-      appendSync(`${DAY_DTEND_STRING_BEGIN}${day.getIcalNextDayString()}\n`);
-      appendSync(
-        `${DAY_DTSTAMP_STRING_BEGIN}${day.getIcalTimestampString()}\n`,
-      );
+      appendSync(`${DAY_DTSTART_STRING_BEGIN + day.getIcalDayString()}\n`);
+      appendSync(`${DAY_DTEND_STRING_BEGIN + day.getIcalNextDayString()}\n`);
+      appendSync(`${DAY_DTSTAMP_STRING_BEGIN + day.getIcalTimestampString()}\n`);
       appendSync(DAY_CATEGORY_STRING);
       appendSync(DAY_END_STRING);
     }

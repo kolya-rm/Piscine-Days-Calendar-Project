@@ -4,92 +4,116 @@ PRODID:-//Migracode BCN//Commemorable Calendar 1.0//EN
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
 SUMMARY:International Binturong Day
-UID:20200509T213444160Z-kolya.rm@migracode.org
+UID:20200508T221010972Z-kolya.rm@migracode.org
+DESCRIPTION:Binturongs are really cute, and smell of popcorn.
 TRANSP:TRANSPARENT
-DTSTART:20200509
-DTEND:20200510
-DTSTAMP:20200509T213444
+DTSTART:20200508
+DTEND:20200509
+DTSTAMP:20200508T221010
 CATEGORIES: Migracode iCal commemorable calendar day
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:International Vulture Awareness Day
-UID:20200905T213444259Z-kolya.rm@migracode.org
+UID:20200904T221011074Z-kolya.rm@migracode.org
+DESCRIPTION:Vultures are a much maligned species. They provide vital ser
+ vices to the ecosystem, and without them the world would be a much worse
+  place.
 TRANSP:TRANSPARENT
-DTSTART:20200905
-DTEND:20200906
-DTSTAMP:20200905T213444
+DTSTART:20200904
+DTEND:20200905
+DTSTAMP:20200904T221011
 CATEGORIES: Migracode iCal commemorable calendar day
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:International Red Panda Day
-UID:20200919T213444259Z-kolya.rm@migracode.org
+UID:20200918T221011074Z-kolya.rm@migracode.org
+DESCRIPTION:Red pandas are an endangered species. They happen to be real
+ ly cute, but that's not the only reason we should help them to thrive!
 TRANSP:TRANSPARENT
-DTSTART:20200919
-DTEND:20200920
-DTSTAMP:20200919T213444
+DTSTART:20200918
+DTEND:20200919
+DTSTAMP:20200918T221011
 CATEGORIES: Migracode iCal commemorable calendar day
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Ada Lovelace Day
-UID:20201013T213444357Z-kolya.rm@migracode.org
+UID:20201012T221011154Z-kolya.rm@migracode.org
+DESCRIPTION:Ada Lovelace was a mathematician who made contributions to t
+ he field of computing in its very early days. On Ada Lovelace Day we cel
+ ebrate and raise awareness of the contributions of women to STEM fields.
 TRANSP:TRANSPARENT
-DTSTART:20201013
-DTEND:20201014
-DTSTAMP:20201013T213444
+DTSTART:20201012
+DTEND:20201013
+DTSTAMP:20201012T221011
 CATEGORIES: Migracode iCal commemorable calendar day
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:World Lemur Day
-UID:20201030T223444357Z-kolya.rm@migracode.org
+UID:20201029T231011154Z-kolya.rm@migracode.org
+DESCRIPTION:Lemurs are excellent. Did you know that the most likely scie
+ ntific theory as to how they got to Madagascar is that they rafted there
+  from mainland Africa?
 TRANSP:TRANSPARENT
-DTSTART:20201030
-DTEND:20201031
-DTSTAMP:20201030T223444
+DTSTART:20201029
+DTEND:20201030
+DTSTAMP:20201029T231011
 CATEGORIES: Migracode iCal commemorable calendar day
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:International Binturong Day
-UID:20210508T213444426Z-kolya.rm@migracode.org
+UID:20210507T221011215Z-kolya.rm@migracode.org
+DESCRIPTION:Binturongs are really cute, and smell of popcorn.
 TRANSP:TRANSPARENT
-DTSTART:20210508
-DTEND:20210509
-DTSTAMP:20210508T213444
+DTSTART:20210507
+DTEND:20210508
+DTSTAMP:20210507T221011
 CATEGORIES: Migracode iCal commemorable calendar day
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:International Vulture Awareness Day
-UID:20210904T213444440Z-kolya.rm@migracode.org
+UID:20210903T221011229Z-kolya.rm@migracode.org
+DESCRIPTION:Vultures are a much maligned species. They provide vital ser
+ vices to the ecosystem, and without them the world would be a much worse
+  place.
 TRANSP:TRANSPARENT
-DTSTART:20210904
-DTEND:20210905
-DTSTAMP:20210904T213444
+DTSTART:20210903
+DTEND:20210904
+DTSTAMP:20210903T221011
 CATEGORIES: Migracode iCal commemorable calendar day
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:International Red Panda Day
-UID:20210918T213444440Z-kolya.rm@migracode.org
+UID:20210917T221011229Z-kolya.rm@migracode.org
+DESCRIPTION:Red pandas are an endangered species. They happen to be real
+ ly cute, but that's not the only reason we should help them to thrive!
 TRANSP:TRANSPARENT
-DTSTART:20210918
-DTEND:20210919
-DTSTAMP:20210918T213444
+DTSTART:20210917
+DTEND:20210918
+DTSTAMP:20210917T221011
 CATEGORIES: Migracode iCal commemorable calendar day
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:Ada Lovelace Day
-UID:20211012T213444444Z-kolya.rm@migracode.org
+UID:20211011T221011233Z-kolya.rm@migracode.org
+DESCRIPTION:Ada Lovelace was a mathematician who made contributions to t
+ he field of computing in its very early days. On Ada Lovelace Day we cel
+ ebrate and raise awareness of the contributions of women to STEM fields.
 TRANSP:TRANSPARENT
-DTSTART:20211012
-DTEND:20211013
-DTSTAMP:20211012T213444
+DTSTART:20211011
+DTEND:20211012
+DTSTAMP:20211011T221011
 CATEGORIES: Migracode iCal commemorable calendar day
 END:VEVENT
 BEGIN:VEVENT
 SUMMARY:World Lemur Day
-UID:20211029T213444444Z-kolya.rm@migracode.org
+UID:20211028T221011233Z-kolya.rm@migracode.org
+DESCRIPTION:Lemurs are excellent. Did you know that the most likely scie
+ ntific theory as to how they got to Madagascar is that they rafted there
+  from mainland Africa?
 TRANSP:TRANSPARENT
-DTSTART:20211029
-DTEND:20211030
-DTSTAMP:20211029T213444
+DTSTART:20211028
+DTEND:20211029
+DTSTAMP:20211028T221011
 CATEGORIES: Migracode iCal commemorable calendar day
 END:VEVENT
 END:VCALENDAR
