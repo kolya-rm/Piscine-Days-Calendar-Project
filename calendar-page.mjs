@@ -1,6 +1,6 @@
 import commemorativeDays from "./days.json" with { type: "json" };
 import { CalendarDay } from "./calendar-day.mjs";
-import { getData, setData } from "./storage.mjs";
+import { getDescription, setDescription } from "./storage.mjs";
 
 
 export class CalendarPage {
@@ -144,13 +144,21 @@ export class CalendarPage {
   }
 
   async #getDescription(day) {
+    const id = day.name.replace(/\s/g, "-");
+    let description = getDescription(id);
+    if (description) {
+      console.log("Description get from local storage:", description);
+      return description;
+    }
     try {
       const response = await fetch(day.descriptionURL);
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
-      const text = await response.text();
-      return text;
+      description = await response.text();
+      setDescription(id, description);
+      console.log("Description fetched from url:", description);
+      return description;
     }
     catch (error) {
       console.error("Error fetching description data:", error)

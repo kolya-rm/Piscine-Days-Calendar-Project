@@ -1,6 +1,6 @@
 import { IcalGenerator } from "./ical-generator.mjs";
 
-describe("Commemorable day generator test", () =>{
+describe("Commemorative day generator test", () =>{
   
   const generator = new IcalGenerator();
 
