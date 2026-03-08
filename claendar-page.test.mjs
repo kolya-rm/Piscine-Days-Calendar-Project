@@ -3,23 +3,13 @@ import { CalendarPage } from "./calendar-page.mjs";
 
 
 describe("CalendarPage static functions", () =>{
-
-  test("Should return correct month name string", () => {
-    expect(CalendarPage.getMonthString(2)).toEqual("March");
-  });
-
   test("Should return correct month day count", () => {
     expect(CalendarPage.getDayCount(2028, 1)).toEqual(29);
-  });
-
-  test("Should return correct occurrence string", () => {
-    expect(CalendarPage.getOccurrenceString(0)).toEqual("first");
   });
 });
 
 
 describe("CalendarPage class instance getter functions", () =>{
-
   let calendarPage = new CalendarPage(2026, 2);
   
   test("Should return correct year", () => {
@@ -51,7 +41,6 @@ describe("CalendarPage class instance getter functions", () =>{
 
 
 describe("CalendarPage class instance month manipulate functions", () =>{
-
   let calendarPage = new CalendarPage(2026, 2);
   
   test("Should correctly update month", () => {
@@ -85,9 +74,7 @@ describe("CalendarPage class instance month manipulate functions", () =>{
 
 
 describe("CalendarPage class commemorative days create tests", () => {
-  
   test("Should correctly set Ada Lovelace day in the year 2026", () => {
-    
     let october2026 = new CalendarPage();
     october2026.updateMonth(9);
     let adaLovelaceDay = october2026.getDays()[16];
@@ -96,11 +83,10 @@ describe("CalendarPage class commemorative days create tests", () => {
     expect(adaLovelaceDay.getMonth()).toEqual(9);
     expect(adaLovelaceDay.getDay()).toEqual(13);
     expect(adaLovelaceDay.getWeekDayString()).toEqual("Tuesday");
-    expect(adaLovelaceDay.description).toEqual("Ada Lovelace Day");
+    expect(adaLovelaceDay.getName()).toEqual("Ada Lovelace Day");
   });
   
   test("Should correctly set International Binturong Day day", () => {
-    
     let may2267 = new CalendarPage();
     may2267.updateYear(2267);
     may2267.updateMonth(4);
@@ -110,7 +96,7 @@ describe("CalendarPage class commemorative days create tests", () => {
     expect(internationalBinturongDay.getMonth()).toEqual(4);
     expect(internationalBinturongDay.getDay()).toEqual(11);
     expect(internationalBinturongDay.getWeekDayString()).toEqual("Saturday");
-    expect(internationalBinturongDay.description).toEqual(
+    expect(internationalBinturongDay.getName()).toEqual(
       "International Binturong Day",
     );
   });

@@ -2,39 +2,45 @@ import { CalendarPage } from "./calendar-page.mjs";
 
 
 const calendarPage = new CalendarPage();
-const yearInput = document.getElementById("year-input");
-const monthSelect = document.getElementById("month-select");
-const backwardButton = document.getElementById("month-backward-button");
-const frowardButton = document.getElementById("month-forward-button");
-const calendarDaysContainer = document.getElementById("calendar-body");
+
+const YEAR_INPUT = document.getElementById("year-input");
+const MONTH_SELECT = document.getElementById("month-select");
+const BACKWARD_BUTTON = document.getElementById("month-backward-button");
+const MONTH_TEXT = document.getElementById("month-text");
+const FORWARD_BUTTON = document.getElementById("month-forward-button");
+const CALENDAR_DAY_CONTAINER = document.getElementById("calendar-body");
+
+const DAY_TEMPLATE = document.getElementById("day-template");
 
 
 //region prepare
 function setupPageElements() {
-  yearInput.addEventListener("change", () => {
-    calendarPage.updateYear(yearInput.value);
+  YEAR_INPUT.addEventListener("change", () => {
+    calendarPage.updateYear(YEAR_INPUT.value);
     render();
   });
-  yearInput.addEventListener("input", () => {
-    if(yearInput.value.length > CalendarPage.YEAR_MAX_LENGTH) {
-      yearInput.value = yearInput.value.slice(0, CalendarPage.YEAR_MAX_LENGTH);
+  YEAR_INPUT.addEventListener("input", () => {
+    if(YEAR_INPUT.value.length > CalendarPage.YEAR_MAX_LENGTH) {
+      YEAR_INPUT.value = YEAR_INPUT.value.slice(0, CalendarPage.YEAR_MAX_LENGTH);
     }
   });
 
-  for (let month = 0; month < CalendarPage.MONTH_STRINGS.length; month++) {
-    monthSelect.add(new Option(CalendarPage.getMonthString(month), month));
+  for (let month = 0; month < CalendarPage.MONTH_IN_YEAR; month++) {
+    const date = new Date();
+    date.setMonth(month);
+    MONTH_SELECT.add(new Option(date.toLocaleString("en-US", { month: "long" }), month));
   }
-  monthSelect.addEventListener("change", () => {
-    calendarPage.updateMonth(monthSelect.value);
+  MONTH_SELECT.addEventListener("change", () => {
+    calendarPage.updateMonth(MONTH_SELECT.value);
     render();
   });
 
-  backwardButton.addEventListener("click", () => {
+  BACKWARD_BUTTON.addEventListener("click", () => {
     calendarPage.changeMonth(-1);
     render();
   });
 
-  frowardButton.addEventListener("click", () => {
+  FORWARD_BUTTON.addEventListener("click", () => {
     calendarPage.changeMonth(1);
     render();
   });
@@ -51,20 +57,19 @@ function render() {
 }
 
 function renderYearInput() {
-  yearInput.value = calendarPage.getYear();
+  YEAR_INPUT.value = calendarPage.getYear();
 }
 
 function renderMonthSelect() {
-  monthSelect.value = calendarPage.getMonth();
+  MONTH_SELECT.value = calendarPage.getMonth();
 }
 
 function renderMonthText() {
-  document.getElementById("month-text").innerText =
-    `${calendarPage.getMonthString()} ${calendarPage.getYear()}`;
+  MONTH_TEXT.innerText = `${calendarPage.getMonthString()} ${calendarPage.getYear()}`;
 }
 
 function renderCalendarDays() {
-  calendarDaysContainer.innerHTML = "";
+  CALENDAR_DAY_CONTAINER.innerHTML = "";
 
   for (const day of calendarPage.getDays()) {
     renderCalendarDay(day);
@@ -72,7 +77,7 @@ function renderCalendarDays() {
 }
 
 function renderCalendarDay(day) {
-  const dayElement = document.getElementById("day-template").content.cloneNode(true);
+  const dayElement = DAY_TEMPLATE.content.cloneNode(true);
 
   dayElement.querySelector(".day-number p").innerText = day.getDay();
   if (day.isSunday()) {
@@ -81,11 +86,11 @@ function renderCalendarDay(day) {
   if (!calendarPage.isCurrentMonthDay(day)) {
     dayElement.querySelector(".day").classList.add("day-non-current-month");
   }
-  if (day.getDescription()) {
-    dayElement.querySelector(".day-description p").innerText = day.getDescription();
+  if (day.getName()) {
+    dayElement.querySelector(".day-description p").innerText = day.getName();
   }
 
-  calendarDaysContainer.appendChild(dayElement);
+  CALENDAR_DAY_CONTAINER.appendChild(dayElement);
 }
 //endregion
 
