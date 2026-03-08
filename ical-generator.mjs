@@ -26,9 +26,9 @@ export class IcalGenerator {
 
   
   //region interface
-  collect() {
+  async collect() {
     const currentMonth = new CalendarPage();
-    currentMonth.updateYearMonth(
+    await currentMonth.updateYearMonth(
       this.#startMonth.getFullYear(),
       this.#startMonth.getMonth(),
     );
@@ -36,7 +36,7 @@ export class IcalGenerator {
     this.#commemorativeDays.length = 0;
     while (currentMonth.getTime() <= this.#lastMonth.getTime()) {
       this.#commemorativeDays.push(...currentMonth.getDays().filter(day => day.getName()));
-      currentMonth.changeMonth(1);
+      await currentMonth.changeMonth(1);
     }
   }
 
