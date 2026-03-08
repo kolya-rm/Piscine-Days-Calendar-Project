@@ -108,7 +108,7 @@ export class CalendarPage {
           day.getOccurrence() === commemorativeDay.occurrence
         ) {
             day.setName(commemorativeDay.name);
-            day.setDescription(await this.#getDescription(commemorativeDay));
+            await day.setDescription(await this.#getDescription(commemorativeDay));
           }
       }
     }
@@ -145,9 +145,8 @@ export class CalendarPage {
 
   async #getDescription(day) {
     const id = day.name.replace(/\s/g, "-");
-    let description = getDescription(id);
+    let description = await getDescription(id);
     if (description) {
-      console.log("Description get from local storage:", description);
       return description;
     }
     try {
@@ -157,7 +156,6 @@ export class CalendarPage {
       }
       description = await response.text();
       setDescription(id, description);
-      console.log("Description fetched from url:", description);
       return description;
     }
     catch (error) {

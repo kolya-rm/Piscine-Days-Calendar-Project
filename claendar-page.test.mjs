@@ -40,7 +40,7 @@ describe("CalendarPage class instance getter functions", () =>{
 });
 
 
-describe("CalendarPage class instance month manipulate functions", () =>{
+describe("CalendarPage class instance month manipulate functions", () => {
   let calendarPage = new CalendarPage(2026, 2);
   
   test("Should correctly update month", () => {
@@ -74,9 +74,9 @@ describe("CalendarPage class instance month manipulate functions", () =>{
 
 
 describe("CalendarPage class commemorative days create tests", () => {
-  test("Should correctly set Ada Lovelace day in the year 2026", () => {
+  test("Should correctly set Ada Lovelace day in the year 2026", async () => {
     let october2026 = new CalendarPage();
-    october2026.updateMonth(9);
+    await october2026.updateMonth(9);
     let adaLovelaceDay = october2026.getDays()[16];
   
     expect(adaLovelaceDay.getYear()).toEqual(2026);
@@ -86,10 +86,10 @@ describe("CalendarPage class commemorative days create tests", () => {
     expect(adaLovelaceDay.getName()).toEqual("Ada Lovelace Day");
   });
   
-  test("Should correctly set International Binturong Day day", () => {
+  test("Should correctly set International Binturong Day day", async () => {
     let may2267 = new CalendarPage();
-    may2267.updateYear(2267);
-    may2267.updateMonth(4);
+    await may2267.updateYear(2267);
+    await may2267.updateMonth(4);
     let internationalBinturongDay = may2267.getDays()[13];
 
     expect(internationalBinturongDay.getYear()).toEqual(2267);

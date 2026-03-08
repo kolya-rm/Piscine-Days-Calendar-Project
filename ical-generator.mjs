@@ -52,7 +52,7 @@ export class IcalGenerator {
   #printDays() {
     for (const day of this.#commemorativeDays) {
       appendSync(DAY_START_STRING);
-      appendSync(`${DAY_SUMMARY_STRING_BEGIN}${day.description}\n`);
+      appendSync(`${DAY_SUMMARY_STRING_BEGIN}${day.getName()}\n`);
       appendSync(
         `${DAY_UID_STRING_BEGIN}${day.getTimestampString()}${DAY_UID_STRING_END}`,
       );
