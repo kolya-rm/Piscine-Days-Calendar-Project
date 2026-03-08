@@ -105,15 +105,15 @@ export class CalendarPage {
     const days = this.getDays();
     for (let i = 0; i < days.length; i++) {
       let occurrenceIndex = Math.trunc(i / CalendarPage.WEEK_DAY_COUNT);
-      days[i].occurrence = CalendarPage.getOccurrenceString(occurrenceIndex);
+      days[i].setOccurrence(CalendarPage.getOccurrenceString(occurrenceIndex));
     }
   }
 
   createReverseOrderOccurrences() {
     const days = this.getDays();
-    const occurrenceString = CalendarPage.getOccurrenceString(CalendarPage.OCCURRENCE_STRINGS.length - 1);
+    const occurrence = CalendarPage.getOccurrenceString(CalendarPage.OCCURRENCE_STRINGS.length - 1);
     for (let i = 1; i <= CalendarPage.WEEK_DAY_COUNT; i++) {
-      days[days.length - i].occurrence = occurrenceString;
+      days[days.length - i].setOccurrence(occurrence);
     }
   }
 
@@ -125,7 +125,7 @@ export class CalendarPage {
           day.getWeekDayString() === commemorativeDay.dayName &&
           day.getOccurrence() === commemorativeDay.occurrence
         ) {
-            day.description = commemorativeDay.name;
+            day.setName(commemorativeDay.name);
           }
       }
     }

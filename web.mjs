@@ -84,8 +84,8 @@ function renderCalendarDay(day) {
   if (!calendarPage.isCurrentMonthDay(day)) {
     dayElement.querySelector(".day").classList.add("day-non-current-month");
   }
-  if (day.getDescription()) {
-    dayElement.querySelector(".day-description p").innerText = day.getDescription();
+  if (day.getName()) {
+    dayElement.querySelector(".day-description p").innerText = day.getName();
   }
 
   calendarDaysContainer.appendChild(dayElement);

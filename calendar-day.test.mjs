@@ -2,8 +2,8 @@ import { CalendarDay } from "./calendar-day.mjs";
 
 describe("CalendarDay class functions", () =>{
   const calendarDay = new CalendarDay(2024, 1, 29);
-  calendarDay.description = "There is should be some description string";
-  calendarDay.occurrence = "last";
+  calendarDay.setName("There is should be some name string");
+  calendarDay.setOccurrence("last");
 
   test("Returns correct year", () => {
     expect(calendarDay.getYear()).toEqual(2024);
@@ -30,8 +30,8 @@ describe("CalendarDay class functions", () =>{
   });
 
   test("Returns correct description", () => {
-    expect(calendarDay.getDescription()).toEqual(
-      "There is should be some description string",
+    expect(calendarDay.getName()).toEqual(
+      "There is should be some name string",
     );
   });
 

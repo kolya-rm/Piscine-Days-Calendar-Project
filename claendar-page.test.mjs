@@ -96,7 +96,7 @@ describe("CalendarPage class commemorative days create tests", () => {
     expect(adaLovelaceDay.getMonth()).toEqual(9);
     expect(adaLovelaceDay.getDay()).toEqual(13);
     expect(adaLovelaceDay.getWeekDayString()).toEqual("Tuesday");
-    expect(adaLovelaceDay.description).toEqual("Ada Lovelace Day");
+    expect(adaLovelaceDay.getName()).toEqual("Ada Lovelace Day");
   });
   
   test("Should correctly set International Binturong Day day", () => {
@@ -110,7 +110,7 @@ describe("CalendarPage class commemorative days create tests", () => {
     expect(internationalBinturongDay.getMonth()).toEqual(4);
     expect(internationalBinturongDay.getDay()).toEqual(11);
     expect(internationalBinturongDay.getWeekDayString()).toEqual("Saturday");
-    expect(internationalBinturongDay.description).toEqual(
+    expect(internationalBinturongDay.getName()).toEqual(
       "International Binturong Day",
     );
   });

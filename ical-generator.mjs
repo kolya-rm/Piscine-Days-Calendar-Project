@@ -34,7 +34,7 @@ export class IcalGenerator {
 
     this.#commemorableDays.length = 0;
     while (currentMonth.getTime() <= this.#lastMonth.getTime()) {
-      this.#commemorableDays.push(...currentMonth.getDays().filter(day => day.description));
+      this.#commemorableDays.push(...currentMonth.getDays().filter(day => day.getName()));
       currentMonth.changeMonth(1);
     }
   }
