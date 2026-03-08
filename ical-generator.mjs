@@ -26,7 +26,7 @@ export class IcalGenerator {
 
   //region interface
   collect() {
-    let currentMonth = new CalendarPage();
+    const currentMonth = new CalendarPage();
     currentMonth.updateYearMonth(
       this.#startMonth.getFullYear(),
       this.#startMonth.getMonth(),
@@ -49,7 +49,7 @@ export class IcalGenerator {
 
   //region inner logic
   #printDays() {
-    for (let day of this.#commemorableDays) {
+    for (const day of this.#commemorableDays) {
       appendSync(DAY_START_STRING);
       appendSync(`${DAY_SUMMARY_STRING_BEGIN}${day.description}\n`);
       appendSync(
@@ -67,7 +67,7 @@ export class IcalGenerator {
   }
   //endregion
 
-  
+
   //region getters/setters
   getStartMonth() {
     return this.#startMonth;

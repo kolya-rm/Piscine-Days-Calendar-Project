@@ -110,23 +110,23 @@ export class CalendarPage {
   }
 
   createReverseOrderOccurrences() {
-    let days = this.getDays();
-    let occurrenceString = CalendarPage.getOccurrenceString(CalendarPage.OCCURRENCE_STRINGS.length - 1);
+    const days = this.getDays();
+    const occurrenceString = CalendarPage.getOccurrenceString(CalendarPage.OCCURRENCE_STRINGS.length - 1);
     for (let i = 1; i <= CalendarPage.WEEK_DAY_COUNT; i++) {
       days[days.length - i].occurrence = occurrenceString;
     }
   }
 
   createCommemorativeDates() {
-    for (let day of this.getDays()) {
-      for (let commemorativeDay of commemorativeDays) {
+    for (const day of this.getDays()) {
+      for (const commemorativeDay of commemorativeDays) {
         if (
           this.getMonthString() === commemorativeDay.monthName &&
           day.getWeekDayString() === commemorativeDay.dayName &&
           day.getOccurrence() === commemorativeDay.occurrence
         ) {
-          day.description = commemorativeDay.name;
-        }
+            day.description = commemorativeDay.name;
+          }
       }
     }
   }

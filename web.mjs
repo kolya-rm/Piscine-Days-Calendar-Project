@@ -2,11 +2,15 @@ import { CalendarPage } from "./calendar-page.mjs";
 
 
 const calendarPage = new CalendarPage();
+
 const yearInput = document.getElementById("year-input");
 const monthSelect = document.getElementById("month-select");
 const backwardButton = document.getElementById("month-backward-button");
+const monthText = document.getElementById("month-text");
 const frowardButton = document.getElementById("month-forward-button");
 const calendarDaysContainer = document.getElementById("calendar-body");
+
+const dayElementTemplate = document.getElementById("day-template");
 
 
 //region prepare
@@ -59,8 +63,7 @@ function renderMonthSelect() {
 }
 
 function renderMonthText() {
-  document.getElementById("month-text").innerText =
-    `${calendarPage.getMonthString()} ${calendarPage.getYear()}`;
+  monthText.innerText = `${calendarPage.getMonthString()} ${calendarPage.getYear()}`;
 }
 
 function renderCalendarDays() {
@@ -72,7 +75,7 @@ function renderCalendarDays() {
 }
 
 function renderCalendarDay(day) {
-  const dayElement = document.getElementById("day-template").content.cloneNode(true);
+  const dayElement = dayElementTemplate.content.cloneNode(true);
 
   dayElement.querySelector(".day-number p").innerText = day.getDay();
   if (day.isSunday()) {
