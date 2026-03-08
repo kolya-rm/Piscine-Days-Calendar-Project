@@ -2,6 +2,7 @@ export class CalendarDay {
   #timestamp = 0;
   #occurrence = "";
   #name = "";
+  #description = "";
 
   constructor(year, month, day) {
     this.#timestamp = new Date();
@@ -44,6 +45,14 @@ export class CalendarDay {
   
   setName(name) {
     this.#name = name;
+  }
+
+  getDescription() {
+    return this.#description;
+  }
+
+  setDescription(description) {
+    this.#description = description;
   }
 
   isSunday() {
