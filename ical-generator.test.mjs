@@ -17,6 +17,6 @@ describe("Commemorable day generator test", () =>{
     generator.setLastMonth(2026, 11);
     generator.collect();
 
-    expect(generator.getCommemorableDays().length).toEqual(5);
+    expect(generator.getCommemorativeDays().length).toEqual(5);
   })
 });

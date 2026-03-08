@@ -22,8 +22,9 @@ const DAY_CATEGORY_STRING = "CATEGORIES: Migracode iCal commemorable calendar da
 export class IcalGenerator {
   #startMonth;
   #lastMonth;
-  #commemorableDays = [];
+  #commemorativeDays = [];
 
+  
   //region interface
   collect() {
     const currentMonth = new CalendarPage();
@@ -32,9 +33,9 @@ export class IcalGenerator {
       this.#startMonth.getMonth(),
     );
 
-    this.#commemorableDays.length = 0;
+    this.#commemorativeDays.length = 0;
     while (currentMonth.getTime() <= this.#lastMonth.getTime()) {
-      this.#commemorableDays.push(...currentMonth.getDays().filter(day => day.getName()));
+      this.#commemorativeDays.push(...currentMonth.getDays().filter(day => day.getName()));
       currentMonth.changeMonth(1);
     }
   }
@@ -49,7 +50,7 @@ export class IcalGenerator {
 
   //region inner logic
   #printDays() {
-    for (const day of this.#commemorableDays) {
+    for (const day of this.#commemorativeDays) {
       appendSync(DAY_START_STRING);
       appendSync(`${DAY_SUMMARY_STRING_BEGIN}${day.description}\n`);
       appendSync(
@@ -77,8 +78,8 @@ export class IcalGenerator {
     return this.#lastMonth;
   }
 
-  getCommemorableDays() {
-    return this.#commemorableDays;
+  getCommemorativeDays() {
+    return this.#commemorativeDays;
   }
 
   setStartMonth(year, month) {
