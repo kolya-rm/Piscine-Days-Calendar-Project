@@ -1,6 +1,7 @@
 import { writeFileSync, appendFileSync, appendFile} from "node:fs";
 import { CalendarPage } from "./calendar-page.mjs";
 
+
 const FILE_NAME = "days.ics";
 
 const CALENDAR_BEGIN_STRING = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Migracode BCN//Commemorable Calendar 1.0//EN\nCALSCALE:GREGORIAN\n";
@@ -17,64 +18,79 @@ const DAY_DTEND_STRING_BEGIN = "DTEND:";
 const DAY_DTSTAMP_STRING_BEGIN = "DTSTAMP:";
 const DAY_CATEGORY_STRING = "CATEGORIES: Migracode iCal commemorable calendar day\n";
 
-export class IcalGenerator {
 
-  startMonth;
-  lastMonth;
-  commemorableDays = [];
+export class IcalGenerator {
+  #startMonth;
+  #lastMonth;
+  #commemorableDays = [];
 
   //region interface
   collect() {
     let currentMonth = new CalendarPage();
     currentMonth.updateYearMonth(
-      this.startMonth.getFullYear(),
-      this.startMonth.getMonth(),
+      this.#startMonth.getFullYear(),
+      this.#startMonth.getMonth(),
     );
 
-    this.commemorableDays.length = 0;
-    while (currentMonth.getTime() <= this.lastMonth.getTime()) {
-      this.commemorableDays.push(
-        ...currentMonth.getDays().filter((day) => day.description),
-      );
+    this.#commemorableDays.length = 0;
+    while (currentMonth.getTime() <= this.#lastMonth.getTime()) {
+      this.#commemorableDays.push(...currentMonth.getDays().filter(day => day.description));
       currentMonth.changeMonth(1);
     }
-
-    console.log(this.commemorableDays);
   }
 
   print() {
     writeSync(CALENDAR_BEGIN_STRING);
-    this.printDays();
+    this.#printDays();
     appendFileSync(FILE_NAME, CALENDAR_END_STRING);
   }
+  //endregion
 
-  printDays() {
-    for(let day of this.commemorableDays) {
+
+  //region inner logic
+  #printDays() {
+    for (let day of this.#commemorableDays) {
       appendSync(DAY_START_STRING);
       appendSync(`${DAY_SUMMARY_STRING_BEGIN}${day.description}\n`);
-      appendSync(`${DAY_UID_STRING_BEGIN}${day.getTimestampString()}${DAY_UID_STRING_END}`);
+      appendSync(
+        `${DAY_UID_STRING_BEGIN}${day.getTimestampString()}${DAY_UID_STRING_END}`,
+      );
       appendSync(DAY_TRANSPARENCY_STRING);
       appendSync(`${DAY_DTSTART_STRING_BEGIN}${day.getIcalDayString()}\n`);
       appendSync(`${DAY_DTEND_STRING_BEGIN}${day.getIcalNextDayString()}\n`);
-      appendSync(`${DAY_DTSTAMP_STRING_BEGIN}${day.getIcalTimestampString()}\n`);
+      appendSync(
+        `${DAY_DTSTAMP_STRING_BEGIN}${day.getIcalTimestampString()}\n`,
+      );
       appendSync(DAY_CATEGORY_STRING);
       appendSync(DAY_END_STRING);
     }
   }
   //endregion
 
+  
   //region getters/setters
+  getStartMonth() {
+    return this.#startMonth;
+  }
+
+  getLastMonth() {
+    return this.#lastMonth;
+  }
+
+  getCommemorableDays() {
+    return this.#commemorableDays;
+  }
+
   setStartMonth(year, month) {
-    this.startMonth = new Date(year, month);
-    console.log(this.startMonth.toDateString());
+    this.#startMonth = new Date(year, month);
   }
 
   setLastMonth(year, month) {
-    this.lastMonth = new Date(year, ++month);
-    console.log(this.lastMonth.toDateString());
+    this.#lastMonth = new Date(year, ++month);
   }
   //endregion
 }
+
 
 function writeSync(string) {
   try {
