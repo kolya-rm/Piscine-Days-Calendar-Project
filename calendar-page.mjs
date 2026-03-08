@@ -30,8 +30,10 @@ export class CalendarPage {
     "last",
   ];
 
-  timestamp = 0;
-  days = [];
+
+  #timestamp = 0;
+  #days = [];
+
 
   //regin static
   static getMonthString(month) {
@@ -50,58 +52,58 @@ export class CalendarPage {
 
   //region constructor
   constructor() {
-    this.timestamp = new Date();
-    this.createDays();
+    this.#timestamp = new Date();
+    this.#createDays();
   }
   //endregion
 
 
   //region interface
   updateMonth(month) {
-    this.timestamp.setMonth(month);
-    this.validateDate();
-    this.createDays();
+    this.#timestamp.setMonth(month);
+    this.#validateDate();
+    this.#createDays();
   }
 
   updateYear(year) {
-    this.timestamp.setFullYear(year);
-    this.validateDate();
-    this.createDays();
+    this.#timestamp.setFullYear(year);
+    this.#validateDate();
+    this.#createDays();
   }
 
   updateYearMonth(year, month) {
-    this.timestamp.setFullYear(year);
-    this.timestamp.setMonth(month);
-    this.validateDate();
-    this.createDays();
+    this.#timestamp.setFullYear(year);
+    this.#timestamp.setMonth(month);
+    this.#validateDate();
+    this.#createDays();
   }
 
   changeMonth(delta) {
-    this.timestamp.setMonth(this.timestamp.getMonth() + delta);
-    this.validateDate();
-    this.createDays();
+    this.#timestamp.setMonth(this.#timestamp.getMonth() + delta);
+    this.#validateDate();
+    this.#createDays();
   }
   //endregion
 
 
   //region inner logic
-  createDays() {
-    this.days.length = 0;
-    this.createCurrentMonthDays();
-    this.createDirectOrderOccurrences();
-    this.createReverseOrderOccurrences();
-    this.createCommemorativeDates();
-    this.createPreviousMonthDays();
-    this.createNextMonthDays();
+  #createDays() {
+    this.#days.length = 0;
+    this.#createCurrentMonthDays();
+    this.#createDirectOrderOccurrences();
+    this.#createReverseOrderOccurrences();
+    this.#createCommemorativeDates();
+    this.#createPreviousMonthDays();
+    this.#createNextMonthDays();
   }
 
-  createCurrentMonthDays() {
+  #createCurrentMonthDays() {
     for (let day = 1; day <= this.getDayCount(); day++) {
-      this.days.push(new CalendarDay(this.getYear(), this.getMonth(), day));
+      this.#days.push(new CalendarDay(this.getYear(), this.getMonth(), day));
     }
   }
 
-  createDirectOrderOccurrences() {
+  #createDirectOrderOccurrences() {
     const days = this.getDays();
     for (let i = 0; i < days.length; i++) {
       let occurrenceIndex = Math.trunc(i / CalendarPage.WEEK_DAY_COUNT);
@@ -109,7 +111,7 @@ export class CalendarPage {
     }
   }
 
-  createReverseOrderOccurrences() {
+  #createReverseOrderOccurrences() {
     const days = this.getDays();
     const occurrence = CalendarPage.getOccurrenceString(CalendarPage.OCCURRENCE_STRINGS.length - 1);
     for (let i = 1; i <= CalendarPage.WEEK_DAY_COUNT; i++) {
@@ -117,7 +119,7 @@ export class CalendarPage {
     }
   }
 
-  createCommemorativeDates() {
+  #createCommemorativeDates() {
     for (const day of this.getDays()) {
       for (const commemorativeDay of commemorativeDays) {
         if (
@@ -131,7 +133,7 @@ export class CalendarPage {
     }
   }
 
-  createPreviousMonthDays() {
+  #createPreviousMonthDays() {
     let previousMonthDay = CalendarPage.getDayCount(this.getYear(), this.getMonth() - 1);
     let weekDay = this.getDays()[0].getWeekDay();
 
@@ -140,7 +142,7 @@ export class CalendarPage {
     }
   }
 
-  createNextMonthDays() {
+  #createNextMonthDays() {
     let nextMonthDay = 1;
     let weekday = this.getDays()[this.getDays().length - 1].getWeekDay();
 
@@ -151,12 +153,12 @@ export class CalendarPage {
     }
   }
 
-  validateDate() {
-    if (this.timestamp.getTime() < CalendarPage.DATE_MIN.getTime()) {
-      this.timestamp.setTime(CalendarPage.DATE_MIN);
+  #validateDate() {
+    if (this.#timestamp.getTime() < CalendarPage.DATE_MIN.getTime()) {
+      this.#timestamp.setTime(CalendarPage.DATE_MIN);
     }
-    if (this.timestamp.getTime() > CalendarPage.DATE_MAX.getTime()) {
-      this.timestamp.setTime(CalendarPage.DATE_MAX);
+    if (this.#timestamp.getTime() > CalendarPage.DATE_MAX.getTime()) {
+      this.#timestamp.setTime(CalendarPage.DATE_MAX);
     }
   }
   //endregion
@@ -164,15 +166,15 @@ export class CalendarPage {
 
   //region getters
   getTime() {
-    return this.timestamp.getTime();
+    return this.#timestamp.getTime();
   }
   
   getYear() {
-    return this.timestamp.getFullYear();
+    return this.#timestamp.getFullYear();
   }
 
   getMonth() {
-    return this.timestamp.getMonth();
+    return this.#timestamp.getMonth();
   }
 
   getMonthString() {
@@ -180,7 +182,7 @@ export class CalendarPage {
   }
 
   getDays() {
-    return this.days;
+    return this.#days;
   }
 
   getDayCount() {
