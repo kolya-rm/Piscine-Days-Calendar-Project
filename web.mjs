@@ -15,8 +15,8 @@ const DAY_TEMPLATE = document.getElementById("day-template");
 
 //region prepare
 function setupPageElements() {
-  YEAR_INPUT.addEventListener("change", () => {
-    calendarPage.updateYear(YEAR_INPUT.value);
+  YEAR_INPUT.addEventListener("change", async () => {
+    await calendarPage.updateYear(YEAR_INPUT.value);
     render();
   });
   YEAR_INPUT.addEventListener("input", () => {
@@ -30,18 +30,18 @@ function setupPageElements() {
     date.setMonth(month);
     MONTH_SELECT.add(new Option(date.toLocaleString("en-US", { month: "long" }), month));
   }
-  MONTH_SELECT.addEventListener("change", () => {
-    calendarPage.updateMonth(MONTH_SELECT.value);
+  MONTH_SELECT.addEventListener("change", async () => {
+    await calendarPage.updateMonth(MONTH_SELECT.value);
     render();
   });
 
-  BACKWARD_BUTTON.addEventListener("click", () => {
-    calendarPage.changeMonth(-1);
+  BACKWARD_BUTTON.addEventListener("click", async () => {
+    await calendarPage.changeMonth(-1);
     render();
   });
 
-  FORWARD_BUTTON.addEventListener("click", () => {
-    calendarPage.changeMonth(1);
+  FORWARD_BUTTON.addEventListener("click", async () => {
+    await calendarPage.changeMonth(1);
     render();
   });
 }

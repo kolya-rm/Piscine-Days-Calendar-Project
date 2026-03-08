@@ -1,5 +1,6 @@
 import commemorativeDays from "./days.json" with { type: "json" };
 import { CalendarDay } from "./calendar-day.mjs";
+import { getData, setData } from "./storage.mjs";
 
 
 export class CalendarPage {
@@ -38,40 +39,40 @@ export class CalendarPage {
 
 
   //region interface
-  updateMonth(month) {
+  async updateMonth(month) {
     this.#timestamp.setMonth(month);
     this.#validateDate();
-    this.#createDays();
+    await this.#createDays();
   }
 
-  updateYear(year) {
+  async updateYear(year) {
     this.#timestamp.setFullYear(year);
     this.#validateDate();
-    this.#createDays();
+    await this.#createDays();
   }
 
-  updateYearMonth(year, month) {
+  async updateYearMonth(year, month) {
     this.#timestamp.setFullYear(year);
     this.#timestamp.setMonth(month);
     this.#validateDate();
-    this.#createDays();
+    await this.#createDays();
   }
 
-  changeMonth(delta) {
+  async changeMonth(delta) {
     this.#timestamp.setMonth(this.#timestamp.getMonth() + delta);
     this.#validateDate();
-    this.#createDays();
+    await this.#createDays();
   }
   //endregion
 
 
   //region inner logic
-  #createDays() {
+  async #createDays() {
     this.#days.length = 0;
     this.#createCurrentMonthDays();
     this.#createDirectOrderOccurrences();
     this.#createReverseOrderOccurrences();
-    this.#createCommemorativeDates();
+    await this.#createCommemorativeDates();
     this.#createPreviousMonthDays();
     this.#createNextMonthDays();
   }
@@ -98,7 +99,7 @@ export class CalendarPage {
     }
   }
 
-  #createCommemorativeDates() {
+  async #createCommemorativeDates() {
     for (const day of this.getDays()) {
       for (const commemorativeDay of commemorativeDays) {
         if (
@@ -107,6 +108,7 @@ export class CalendarPage {
           day.getOccurrence() === commemorativeDay.occurrence
         ) {
             day.setName(commemorativeDay.name);
+            day.setDescription(await this.#getDescription(commemorativeDay));
           }
       }
     }
@@ -138,6 +140,23 @@ export class CalendarPage {
     }
     if (this.#timestamp.getTime() > CalendarPage.DATE_MAX.getTime()) {
       this.#timestamp.setTime(CalendarPage.DATE_MAX);
+    }
+  }
+
+  async #getDescription(day) {
+    try {
+      const response = await fetch(day.descriptionURL);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      const text = await response.text();
+      return text;
+    }
+    catch (error) {
+      console.error("Error fetching description data:", error)
+    }
+    finally {
+      return "Bulk description: couldn't fetch data";
     }
   }
   //endregion
