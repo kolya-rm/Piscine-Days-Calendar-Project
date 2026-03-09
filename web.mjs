@@ -12,6 +12,8 @@ const CALENDAR_DAY_CONTAINER = document.getElementById("calendar-body");
 
 const DAY_TEMPLATE = document.getElementById("day-template");
 
+const MODAL_DESCRIPTION_WINDOW = document.getElementById("modal-description");
+
 
 //region prepare
 function setupPageElements() {
@@ -44,6 +46,8 @@ function setupPageElements() {
     await calendarPage.changeMonth(1);
     render();
   });
+
+  MODAL_DESCRIPTION_WINDOW.addEventListener("click", closeModalDescriptionWindow);
 }
 //endregion
 
@@ -103,4 +107,12 @@ function onLoadWindow() {
 //endregion
 
 
+//region inner logic
+function closeModalDescriptionWindow() {
+  MODAL_DESCRIPTION_WINDOW.style.display = "none";
+}
+//endregion
+
+
 window.onload = onLoadWindow();
+window.onbeforeunload =closeModalDescriptionWindow();
