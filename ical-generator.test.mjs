@@ -1,6 +1,6 @@
 import { IcalGenerator } from "./ical-generator.mjs";
 
-describe("Commemorable day generator test", () =>{
+describe("Commemorative day generator test", () =>{
   
   const generator = new IcalGenerator();
 
@@ -11,12 +11,11 @@ describe("Commemorable day generator test", () =>{
     expect(generator.getLastMonth().getMonth() - generator.getStartMonth().getMonth()).toEqual(1);
   });
 
-  test("Should return 5 for current 'days.json' file and 1 year", () =>
+  test("Should return 5 for current 'days.json' file and 1 year", async () =>
   {
     generator.setStartMonth(2026, 0);
     generator.setLastMonth(2026, 11);
-    generator.collect();
-
+    await generator.collect();
     expect(generator.getCommemorativeDays().length).toEqual(5);
   })
 });

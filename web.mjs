@@ -6,17 +6,19 @@ const calendarPage = new CalendarPage();
 const YEAR_INPUT = document.getElementById("year-input");
 const MONTH_SELECT = document.getElementById("month-select");
 const BACKWARD_BUTTON = document.getElementById("month-backward-button");
-const MONTH_TEXT = document.getElementById("month-text");
+const MONTH_TEXT = document.querySelector("#month-text h1");
 const FORWARD_BUTTON = document.getElementById("month-forward-button");
 const CALENDAR_DAY_CONTAINER = document.getElementById("calendar-body");
 
 const DAY_TEMPLATE = document.getElementById("day-template");
 
+const MODAL_DESCRIPTION_WINDOW = document.getElementById("modal-description");
+
 
 //region prepare
 function setupPageElements() {
-  YEAR_INPUT.addEventListener("change", () => {
-    calendarPage.updateYear(YEAR_INPUT.value);
+  YEAR_INPUT.addEventListener("change", async () => {
+    await calendarPage.updateYear(YEAR_INPUT.value);
     render();
   });
   YEAR_INPUT.addEventListener("input", () => {
@@ -30,20 +32,22 @@ function setupPageElements() {
     date.setMonth(month);
     MONTH_SELECT.add(new Option(date.toLocaleString("en-US", { month: "long" }), month));
   }
-  MONTH_SELECT.addEventListener("change", () => {
-    calendarPage.updateMonth(MONTH_SELECT.value);
+  MONTH_SELECT.addEventListener("change", async () => {
+    await calendarPage.updateMonth(MONTH_SELECT.value);
     render();
   });
 
-  BACKWARD_BUTTON.addEventListener("click", () => {
-    calendarPage.changeMonth(-1);
+  BACKWARD_BUTTON.addEventListener("click", async () => {
+    await calendarPage.changeMonth(-1);
     render();
   });
 
-  FORWARD_BUTTON.addEventListener("click", () => {
-    calendarPage.changeMonth(1);
+  FORWARD_BUTTON.addEventListener("click", async () => {
+    await calendarPage.changeMonth(1);
     render();
   });
+
+  MODAL_DESCRIPTION_WINDOW.addEventListener("click", closeModalDescriptionWindow);
 }
 //endregion
 
@@ -87,9 +91,15 @@ function renderCalendarDay(day) {
     dayElement.querySelector(".day").classList.add("day-non-current-month");
   }
   if (day.getName()) {
+    console.log();
     dayElement.querySelector(".day-description p").innerText = day.getName();
+    dayElement.querySelector(".day").style.cursor = "pointer";
+    dayElement.querySelector(".day").dataset.date = 
+      `${day.getDay()} ${day.getMonthString()} ${day.getYear()}`;
+    dayElement.querySelector(".day").dataset.name = day.getName();
+    dayElement.querySelector(".day").dataset.content = day.getDescription();
+    dayElement.querySelector(".day").addEventListener("click", openModalDescriptionWindow);
   }
-
   CALENDAR_DAY_CONTAINER.appendChild(dayElement);
 }
 //endregion
@@ -103,4 +113,22 @@ function onLoadWindow() {
 //endregion
 
 
+//region inner logic
+async function openModalDescriptionWindow(event) {
+  MODAL_DESCRIPTION_WINDOW.querySelector("#modal-description-date h1")
+    .innerText = event.target.dataset.date;
+  MODAL_DESCRIPTION_WINDOW.querySelector("#modal-description-name p")
+    .innerText = event.target.dataset.name;
+  MODAL_DESCRIPTION_WINDOW.querySelector("#modal-description-content p")
+    .innerText = event.target.dataset.content;
+  MODAL_DESCRIPTION_WINDOW.style.display = "block";
+}
+
+function closeModalDescriptionWindow() {
+  MODAL_DESCRIPTION_WINDOW.style.display = "none";
+}
+//endregion
+
+
 window.onload = onLoadWindow();
+window.onbeforeunload =closeModalDescriptionWindow();
