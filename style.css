@@ -66,7 +66,7 @@ body {
 
 #month-text {
   text-align: center;
-  font-size: 3vw;
+  font-size: 1.5vw;
   text-transform: capitalize;
   margin: auto;
 }
@@ -112,17 +112,20 @@ body {
   text-align: right;
   font-size: 3vw;
   margin: 0px;
+  pointer-events: none;
 }
 
 .day-description {
   align-items: center;
   align-content: center;
+  pointer-events: none;
 }
 
 .day-description p {
   opacity: 0.6;
   font-size: 1vw;
   text-align: center;
+  pointer-events: none;
 }
 
 .day-sunday {
@@ -144,22 +147,30 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color:aliceblue;
-  padding: 30px;
+  background-color: azure;
+  padding: 40px;
   border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 400px;
-  height: 200px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  width: 40%;
   overflow: auto;
 }
 
-#modal-description-header {
-  font-size: 3vw;
+#modal-description-date {
+  font-size: 1vw;
   text-align: center;
+  margin-bottom: 40px;
+  opacity: 0.9;
+}
+
+#modal-description-name {
+  font-size: 1.7vw;
+  text-align: center;
+  opacity: 0.8;
 }
 
 #modal-description-content {
   font-size: 1.5vw;
   text-align: justify;
   margin: 20px;
+  opacity: 0.7;
 }

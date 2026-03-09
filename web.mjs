@@ -6,7 +6,7 @@ const calendarPage = new CalendarPage();
 const YEAR_INPUT = document.getElementById("year-input");
 const MONTH_SELECT = document.getElementById("month-select");
 const BACKWARD_BUTTON = document.getElementById("month-backward-button");
-const MONTH_TEXT = document.getElementById("month-text");
+const MONTH_TEXT = document.querySelector("#month-text h1");
 const FORWARD_BUTTON = document.getElementById("month-forward-button");
 const CALENDAR_DAY_CONTAINER = document.getElementById("calendar-body");
 
@@ -91,9 +91,15 @@ function renderCalendarDay(day) {
     dayElement.querySelector(".day").classList.add("day-non-current-month");
   }
   if (day.getName()) {
+    console.log();
     dayElement.querySelector(".day-description p").innerText = day.getName();
+    dayElement.querySelector(".day").style.cursor = "pointer";
+    dayElement.querySelector(".day").dataset.date = 
+      `${day.getDay()} ${day.getMonthString()} ${day.getYear()}`;
+    dayElement.querySelector(".day").dataset.name = day.getName();
+    dayElement.querySelector(".day").dataset.content = day.getDescription();
+    dayElement.querySelector(".day").addEventListener("click", openModalDescriptionWindow);
   }
-
   CALENDAR_DAY_CONTAINER.appendChild(dayElement);
 }
 //endregion
@@ -108,6 +114,16 @@ function onLoadWindow() {
 
 
 //region inner logic
+async function openModalDescriptionWindow(event) {
+  MODAL_DESCRIPTION_WINDOW.querySelector("#modal-description-date h1")
+    .innerText = event.target.dataset.date;
+  MODAL_DESCRIPTION_WINDOW.querySelector("#modal-description-name p")
+    .innerText = event.target.dataset.name;
+  MODAL_DESCRIPTION_WINDOW.querySelector("#modal-description-content p")
+    .innerText = event.target.dataset.content;
+  MODAL_DESCRIPTION_WINDOW.style.display = "block";
+}
+
 function closeModalDescriptionWindow() {
   MODAL_DESCRIPTION_WINDOW.style.display = "none";
 }

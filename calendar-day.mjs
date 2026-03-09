@@ -32,10 +32,14 @@ export class CalendarDay {
     return this.#timestamp.toLocaleString("en-US", { weekday: "long" });
   }
 
+  getMonthString() {
+    return this.#timestamp.toLocaleString("en-US", { month: "long" });
+  }
+
   getOccurrence() {
     return this.#occurrence;
   }
-  
+
   setOccurrence(occurrence) {
     this.#occurrence = occurrence;
   }
@@ -43,7 +47,7 @@ export class CalendarDay {
   getName() {
     return this.#name;
   }
-  
+
   setName(name) {
     this.#name = name;
   }
