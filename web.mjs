@@ -1,7 +1,7 @@
 import { CalendarPage } from "./calendar-page.mjs";
 
 
-const calendarPage = new CalendarPage();
+const CALENDAR_PAGE = new CalendarPage();
 
 const YEAR_INPUT = document.getElementById("year-input");
 const MONTH_SELECT = document.getElementById("month-select");
@@ -18,7 +18,7 @@ const MODAL_DESCRIPTION_WINDOW = document.getElementById("modal-description");
 //region prepare
 function setupPageElements() {
   YEAR_INPUT.addEventListener("change", async () => {
-    await calendarPage.updateYear(YEAR_INPUT.value);
+    await CALENDAR_PAGE.updateYear(YEAR_INPUT.value);
     render();
   });
   YEAR_INPUT.addEventListener("input", () => {
@@ -33,17 +33,17 @@ function setupPageElements() {
     MONTH_SELECT.add(new Option(date.toLocaleString("en-US", { month: "long" }), month));
   }
   MONTH_SELECT.addEventListener("change", async () => {
-    await calendarPage.updateMonth(MONTH_SELECT.value);
+    await CALENDAR_PAGE.updateMonth(MONTH_SELECT.value);
     render();
   });
 
   BACKWARD_BUTTON.addEventListener("click", async () => {
-    await calendarPage.changeMonth(-1);
+    await CALENDAR_PAGE.changeMonth(-1);
     render();
   });
 
   FORWARD_BUTTON.addEventListener("click", async () => {
-    await calendarPage.changeMonth(1);
+    await CALENDAR_PAGE.changeMonth(1);
     render();
   });
 
@@ -61,21 +61,21 @@ function render() {
 }
 
 function renderYearInput() {
-  YEAR_INPUT.value = calendarPage.getYear();
+  YEAR_INPUT.value = CALENDAR_PAGE.getYear();
 }
 
 function renderMonthSelect() {
-  MONTH_SELECT.value = calendarPage.getMonth();
+  MONTH_SELECT.value = CALENDAR_PAGE.getMonth();
 }
 
 function renderMonthText() {
-  MONTH_TEXT.innerText = `${calendarPage.getMonthString()} ${calendarPage.getYear()}`;
+  MONTH_TEXT.innerText = `${CALENDAR_PAGE.getMonthString()} ${CALENDAR_PAGE.getYear()}`;
 }
 
 function renderCalendarDays() {
   CALENDAR_DAY_CONTAINER.innerHTML = "";
 
-  for (const day of calendarPage.getDays()) {
+  for (const day of CALENDAR_PAGE.getDays()) {
     renderCalendarDay(day);
   }
 }
@@ -87,11 +87,10 @@ function renderCalendarDay(day) {
   if (day.isSunday()) {
     dayElement.querySelector(".day .day-number").classList.add("day-sunday");
   }
-  if (!calendarPage.isCurrentMonthDay(day)) {
+  if (!CALENDAR_PAGE.isCurrentMonthDay(day)) {
     dayElement.querySelector(".day").classList.add("day-non-current-month");
   }
   if (day.getName()) {
-    console.log();
     dayElement.querySelector(".day-description p").innerText = day.getName();
     dayElement.querySelector(".day").style.cursor = "pointer";
     dayElement.querySelector(".day").dataset.date = 
