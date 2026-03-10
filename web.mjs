@@ -91,7 +91,6 @@ function renderCalendarDay(day) {
     dayElement.querySelector(".day").classList.add("day-non-current-month");
   }
   if (day.getName()) {
-    console.log();
     dayElement.querySelector(".day-description p").innerText = day.getName();
     dayElement.querySelector(".day").style.cursor = "pointer";
     dayElement.querySelector(".day").dataset.date = 
